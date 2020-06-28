@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Transition</title>
+  <style>
+    .visible,
+    .content {
+      width: 400px;
+    }
+    .visible img {
+      width: 100%;
+    }
+    .visible {
+      padding: 1em 1em 0;
+      border: 1px solid #4d4d4d;
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding-bottom: .2em;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      transition: all .6s ease-in;
+    }
+    .content.expanded {
+      /* position: relative; */
+    }
+
+    .expand-btn {
+      height: 50px;
+      margin-top: 2em;
+    }
+    .arrow-wrap {
+      width: 60px;
+      height: 50px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .arrow-wrap .left,
+    .arrow-wrap .right {
+      width: 30px;
+      height: 2px;
+      background: gray;
+      position: absolute;
+      top: 20px;
+      transition: transform 1s ease;
+    }
+
+    .arrow-wrap .left {
+      left: 4px;
+      transform: rotate(40deg);
+    }
+    .arrow-wrap .right {
+      right: 4px;
+      transform: rotate(-40deg);
+    }
+
+    .expanded .arrow-wrap .left {
+      left: 4px;
+      transform: rotate(-40deg);
+    }
+    .expanded .arrow-wrap .right {
+      right: 4px;
+      transform: rotate(40deg);
+    }
+
+    .animated .left {
+      animation: .3s linear 0s 2 alternate apart-left;
+    }
+    .animated .right {
+      animation: .3s linear 0s 2 alternate apart-right;
+    }
+
+    @keyframes apart-left {
+      from {
+        left: 4px;
+      }
+      to {
+        left: 0px;
+      }
+    }
+
+    @keyframes apart-right {
+      from {
+        right: 4px;
+      }
+      to {
+        right: 0px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="visible">
+      <img src="./placeholder.jpg">
+      <h4>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      </h4>
+    </div>
+    <div class="content">
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+        recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+      <div class="expand-btn" data-expend-btn>
+        <div class="arrow-wrap">
+          <span class="left down"></span>
+          <span class="right down"></span>
+        </div>
+      </div>
+    </div>
+    <p>
+      this is a paragraph
+    </p>
+  </div>
+
+  
+  <script>
+    const visible = document.querySelector('.visible')
+    const downBtn = document.querySelector('.expand-btn')
+    const content = document.querySelector('.content')
+
+    content.style.transform = `translateY(${-content.offsetHeight + downBtn.offsetHeight}px)`
+
+    downBtn.addEventListener('click', () => {
+      content.classList.toggle('expanded')
+      
+      if (content.className.includes('expanded')) {
+        content.style.transform = `translateY(0px)`
+      } else {
+        content.style.transform = `translateY(${-content.offsetHeight + downBtn.offsetHeight}px)`
+      }
+      
+      // re-trigger animation
+      content.classList.remove('animated')
+      void content.offsetWidth;
+      content.classList.add('animated')
+      // re-trigger animation ---end
+
+    })
+  </script>
+</body>
+</html>
