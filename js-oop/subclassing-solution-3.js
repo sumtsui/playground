@@ -13,17 +13,17 @@
   throuth its __proto__ property, will have access to the methods in the Object-Function combo's prototype
 */
 function userCreator(name, score) {
-   this.name = name
-   this.score = score
+  this.name = name;
+  this.score = score;
 }
 
-userCreator.prototype.sayName = function() {
-  console.log('I\'m ' + this.name)
-}
+userCreator.prototype.sayName = function () {
+  console.log("I'm " + this.name);
+};
 
-userCreator.prototype.increment = function() {
-  this.score++
-}
+userCreator.prototype.increment = function () {
+  this.score++;
+};
 
 function paidUserCreator(paidName, paidScore, accountBalance) {
   /*
@@ -31,8 +31,8 @@ function paidUserCreator(paidName, paidScore, accountBalance) {
     https://frontendmasters.com/courses/object-oriented-js/using-a-call-method-in-a-constructor/
     08:00
   */
-  userCreator.call(this, paidName, paidScore)
-  this.accountBalance = accountBalance
+  userCreator.call(this, paidName, paidScore);
+  this.accountBalance = accountBalance;
 }
 
 /*
@@ -40,11 +40,11 @@ function paidUserCreator(paidName, paidScore, accountBalance) {
   same as: Object.setPrototypeof(paidUserCreator, userCreator)
 */
 
-paidUserCreator.prototype = Object.create(userCreator.prototype)
+paidUserCreator.prototype = Object.create(userCreator.prototype);
 
-paidUserCreator.prototype.increaseBalance = function() {
-  this.accountBalance++
-}
+paidUserCreator.prototype.increaseBalance = function () {
+  this.accountBalance++;
+};
 
 /*
 what the new keyword does for us:
@@ -53,6 +53,6 @@ what the new keyword does for us:
 3. return this
 */
 
-const user1 = new userCreator('Phil', 5)
-const user2 = new userCreator('James', 5)
-const paidUser1 = new paidUserCreator('Alyssa', 100, 500)
+const user1 = new userCreator('Phil', 5);
+const user2 = new userCreator('James', 5);
+const paidUser1 = new paidUserCreator('Alyssa', 100, 500);
