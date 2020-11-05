@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button'
 
 function App() {
+  console.log('I am called');
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +20,7 @@ function App() {
         >
           Learn React
         </a>
+      <Button />
       </header>
     </div>
   );
