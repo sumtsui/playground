@@ -43,16 +43,5 @@ function recurse(index, resultSoFar) {  // 0, ''
     return resultSoFar
   } else {
     return recurse(index + 1, resultSoFar + joinString) // 1, a,
-    ~~~~~
-  }
-}
-
-function recurse(index, resultSoFar) {  // 1, a,
-  resultSoFar += array[ index ] // a,p
-
-  if (index === array.length - 1) { // 1
-    return resultSoFar
-  } else {
-    return recurse(index + 1, resultSoFar + joinString)
   }
 }
