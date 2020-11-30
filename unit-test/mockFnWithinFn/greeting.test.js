@@ -17,7 +17,7 @@ describe('mocking a function in the same module with exports', () => {
     mock.mockRestore();
   });
 
-  it('prints a greeting with a mock planet 1', () => {
+  it('prints a greeting with a mock planet 2', () => {
     const mock = jest
       .spyOn(greeting, 'getPlanet')
       .mockImplementation(() => 'jupiter');
