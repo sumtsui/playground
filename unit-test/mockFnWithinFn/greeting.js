@@ -1,5 +1,5 @@
-exports.getPlanet = function () {
-  return 'world';
+exports.getPlanet = function (planet) {
+  return planet;
 };
 
 exports.getGreeting = function () {
