@@ -1,8 +1,5 @@
 https://btholt.github.io/complete-intro-to-linux-and-the-cli
 
-
-
-
 | Command                                  | Meaning                                                      | Link                                                         |
 | ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | history \| grep <string u r looking for> | Look for command history                                     |                                                              |
@@ -17,6 +14,4 @@ https://btholt.github.io/complete-intro-to-linux-and-the-cli
 | ctrl + D                                 | get out of root                                              |                                                              |
 | uptime                                   | print uptime of machine                                      |                                                              |
 | date                                     | print date                                                   |                                                              |
-
-
-
+| ls -al \| grep -E ".sh\|gradle"          | search for file name matching ".sh" or "gradle". `-E` is `--extended-regexp` | https://linuxize.com/post/grep-multiple-patterns/            |
