@@ -1,28 +1,33 @@
 // We can solve our useState conundrum by… moving our closure inside another closure! (Yo dawg I heard you like closures…)
 const MyReact = (function () {
-  let _val, _deps; // hold our state in module scope
+  let hooks = [],
+    currentHook = 0;
+
   return {
     render(Component) {
-      const Comp = Component();
+      const Comp = Component(); // run effects
       Comp.render();
+      currentHook = 0; // reset for next render
       return Comp;
-    },
-    useState(initialValue) {
-      _val = _val || initialValue; // assign anew every run
-      function setState(newVal) {
-        _val = newVal;
-      }
-      return [_val, setState];
     },
     useEffect(callback, depArray) {
       const hasNoDeps = !depArray;
-      const hasChangedDeps = _deps
-        ? !depArray.every((el, i) => el === _deps[i])
+      const deps = hooks[currentHook];
+      const hasChangedDeps = deps
+        ? !depArray.every((el, i) => el === deps[i]) // check deps change
         : true;
       if (hasNoDeps || hasChangedDeps) {
         callback();
-        _deps = depArray;
+        hooks[currentHook] = depArray;
       }
+      currentHook++;
+    },
+    useState(initialValue) {
+      hooks[currentHook] = hooks[currentHook] || initialValue;
+      const setStateHookIndex = currentHook;
+      const setState = (newState) => (hooks[setStateHookIndex] = newState);
+
+      return [hooks[currentHook++], setState];
     },
   };
 })();
