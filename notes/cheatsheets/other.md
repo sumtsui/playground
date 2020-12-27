@@ -1,5 +1,5 @@
-| Command                 | Meaning                                       | Link                                                         |
-| ----------------------- | --------------------------------------------- | ------------------------------------------------------------ |
-| node inspect <filename> | pair with debugger, to debug a file with node | https://nodejs.org/en/docs/guides/debugging-getting-started/ |
-|                         |                                               |                                                              |
-
+| Command                                       | Meaning                                       | Link                                                                                |
+| --------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------- |
+| node inspect <filename>                       | pair with debugger, to debug a file with node | https://nodejs.org/en/docs/guides/debugging-getting-started/                        |
+| certbot certificates                          | see certified domains                         | https://community.letsencrypt.org/t/remove-domain-not-required-from-cert/14010/22   |
+| how-to-remove-a-domain-from-certbot-and-nginx |                                               | https://www.datanovia.com/en/lessons/how-to-remove-a-domain-from-certbot-and-nginx/ |
