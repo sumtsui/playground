@@ -1,10 +1,11 @@
 authentication with GraphQL
+https://www.apollographql.com/docs/apollo-server/security/authentication/
 
 review new project onboarding
 
 review PS date overlap checking algothrithem
 
-### CORS ᠁
+### CORS
 
 ### GraphQL
 
@@ -17,7 +18,7 @@ review PS date overlap checking algothrithem
 - frontend TDD
 - backend TDD
 
-### React ᠁
+### React
 
 **Implement simple React**
 

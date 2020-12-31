@@ -2,13 +2,10 @@ console.log('script1');
 fetch('http://localhost:2002/data', {
   // mode: 'no-cors'
   // mode: 'cors'
-  credentials: 'include'
+  // credentials: 'include',
 })
-  .then(res => {
-    console.log('res', res);
-    return res.json()
-  })
+  .then((res) => res.json())
   .then((res) => {
-    console.log(res);
+    console.log('get from script', res);
   })
-  .catch(err => console.error(err))
+  .catch((err) => console.error(err));
