@@ -1,3 +1,7 @@
+## Port
+
+Communication endpoint that maps to a specific process or network service
+
 ## SSH
 
 Try to connect to your laptop at home, should be fun.
@@ -6,7 +10,7 @@ https://superuser.com/questions/214759/connect-to-another-mac-via-terminal
 
 ## SFTP
 
-It works the same way as SSH. So if you got SSH setup, you can use SFTP right away. 
+It works the same way as SSH. So if you got SSH setup, you can use SFTP right away.
 
 Commands in the sftp shell:
 
@@ -19,7 +23,7 @@ ls # the list of files in brian's home directory
 help # see all the commands you can do
 ```
 
-Prefix a command with `!` to run it in the sftp shell. 
+Prefix a command with `!` to run it in the sftp shell.
 
 ```bash
 !touch file-to-put.tx
@@ -34,7 +38,7 @@ get putted-file.txt gotten-file.txt # same thing, second one is optional
 
 ## wget
 
-wget works like cp but instead of copying a local file you're copying something off the net. So you'll identify a remote file (usually a URL) that you want to fetch and save to your local file system. 
+wget works like cp but instead of copying a local file you're copying something off the net. So you'll identify a remote file (usually a URL) that you want to fetch and save to your local file system.
 
 ```bash
 wget https://raw.githubusercontent.com/btholt/bash2048/master/bash2048.sh
@@ -46,3 +50,4 @@ The one case you'll want to use wget is if you want recursive downloads of site.
 
 ## curl
 
+## nmap
