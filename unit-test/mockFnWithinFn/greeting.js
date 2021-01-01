@@ -3,5 +3,5 @@ exports.getPlanet = function (planet) {
 };
 
 exports.getGreeting = function () {
-  return `hello ${exports.getPlanet()}!`;
+  return `hello ${exports.getPlanet() || 'world'}!`;
 };
