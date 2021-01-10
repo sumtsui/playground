@@ -1,30 +1,14 @@
 (function () {
-  var name = 'blob';
   function bike() {
     console.log(this.name);
   }
 
-  var obj1 = { name: 'Pulsar', bike: bike };
-  var obj2 = { name: 'Gixxer', bike: bike };
+  var obj1 = { name: 'Pulsar' };
+  var obj2 = { name: 'Gixxer' };
 
   bike(); // undefined
-  obj1.bike(); // "Pulsar"
-  obj2.bike(); // "Gixxer"
-})();
-
-(function () {
-  class Dragon {
-    constructor() {
-      this.power = 'fire';
-    }
-
-    breathe() {
-      console.log('Breathing', this.power);
-    }
-  }
-
-  const kugenhok = new Dragon();
-  kugenhok.breathe();
+  bike.call(obj1); // "Pulsar"
+  bike.call(obj2); // "Gixxer"
 })();
 
 (function () {

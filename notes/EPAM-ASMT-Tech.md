@@ -285,5 +285,51 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
   - Basic understanding of:
 
     - Responsive vs Adaptive design, Mobile First approach, Desktop First
-
 - Progressive Enhancement vs Graceful Degradation approaches1
+
+
+
+## Git workflow
+
+https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+
+Gitflow is ideally suited for projects that have a scheduled release cycle and for the [DevOps best practice](https://www.atlassian.com/devops/what-is-devops/devops-best-practices) of [continuous delivery](https://www.atlassian.com/continuous-delivery). This workflow doesn’t add any new concepts or commands beyond what’s required for the [Feature Branch Workflow](http://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow). Instead, it assigns very specific roles to different branches and defines how and when they should interact. In addition to `feature` branches, it uses individual branches for preparing, maintaining, and recording releases. Of course, you also get to leverage all the benefits of the Feature Branch Workflow: pull requests, isolated experiments, and more efficient collaboration.
+
+### Feature branch workflow
+
+The core idea behind the Feature Branch Workflow is that **all feature development should take place in a dedicated branch** instead of the `master` branch. This encapsulation makes it easy for multiple developers to work on a particular feature without disturbing the main codebase. It also means the `master` branch will never contain broken code, which is a huge advantage for continuous integration environments.
+
+Encapsulating feature development also **makes it possible to leverage pull requests**, which are a way to initiate discussions around a branch. They give other developers the opportunity to sign off on a feature before it gets integrated into the official project. Or, if you get stuck in the middle of a feature, you can open a pull request asking for suggestions from your colleagues. The point is, pull requests make it incredibly easy for your team to comment on each other’s work.
+
+- ### Start with the master branch
+
+- ### Create a new-branch
+
+- ### Update, add, commit, and push changes
+
+- ### Push feature branch to remote
+
+- ### Resolve feedback
+
+- ### Merge your pull request
+
+  What is git squash?
+
+  https://www.git-tower.com/learn/git/faq/git-squash/
+
+  **To "squash" in Git means to combine multiple commits into one.** You can do this at any point in time (by using Git's "Interactive Rebase" feature), though it is most often done when merging branches.
+
+  Once Bill is ready to accept the pull request, someone needs to merge the feature into the stable project (this can be done by either Bill or Mary)
+
+  This process often results in a merge commit. Some developers like this because it’s like a symbolic joining of the feature with the rest of the code base. But, if you’re partial to a linear history, it’s possible to rebase the feature onto the tip of `master` before executing the merge, resulting in a fast-forward merge.
+
+The overall flow of Gitflow is:
+
+1. A `develop` branch is created from `master`
+2. A `release` branch is created from `develop`
+3. `Feature` branches are created from `develop`
+4. When a `feature` is complete it is merged into the `develop` branch
+5. When the `release` branch is done it is merged into `develop`and `master`
+6. If an issue in `master` is detected a `hotfix` branch is created from `master`
+7. Once the `hotfix` is complete it is merged to both `develop`and `master`
+

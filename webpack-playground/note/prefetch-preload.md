@@ -12,7 +12,7 @@ btn.addEventListener('click', () => {
 });
 ```
 
-the magic commend above will add a tag in the html head:
+the magic comment above will add a tag in the html head:
 
 ```html
 <link

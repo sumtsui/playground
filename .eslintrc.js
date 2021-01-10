@@ -31,6 +31,7 @@ module.exports = {
       },
     ],
     'no-console': 0,
+    '@typescript-eslint/no-var-requires': 0,
   },
   parserOptions: {
     sourceType: 'module',
