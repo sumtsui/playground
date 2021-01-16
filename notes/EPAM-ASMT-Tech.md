@@ -1,18 +1,30 @@
 React, NodeJS / Express, JS (OOP)
 
-
+## Security
 
 ## JS Core at Advanced level
 
 ### this
+
+### Map
+
+The **`Map`** object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and [primitive values](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)) may be used as either a key or a value.
+
+### WeakMap
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections#weakmap_object
+
+### Symbol
+
+### Proxy
+
+### Reflect
 
 ### event loop
 
 ### promise
 
 https://medium.com/javascript-scene/javascript-factory-functions-vs-constructor-functions-vs-classes-2f22ceddf33e
-
-
 
 ## Knowing the pros and cons of using TypeScript on the project
 
@@ -52,7 +64,9 @@ Data structures: array, stack, queue, linked-list, tree, hash table (map), set
 
 - Understands main concepts of FP/FRP
 - Able to compare OOP/FP/FRP, mention pros/cons
+
 ### OOP
+
 - **Encapsulation** is one of the fundamentals of **OOP**. It refers to the bundling of data with the methods that operate on that data. **Encapsulation** is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
 
 - **ABSTRACTION** is that "shows" only essential attributes and "hides" unnecessary information. The main purpose of abstraction is hiding the unnecessary details from the users.
@@ -75,7 +89,7 @@ Data structures: array, stack, queue, linked-list, tree, hash table (map), set
 
     Open for extension means that we should be able to add new features or components to the application **without breaking** existing code.
 
-    Closed for modification means that **we should not introduce breaking changes to existing functionality**, 	because that would force you to refactor a lot of existing code
+    Closed for modification means that **we should not introduce breaking changes to existing functionality**, because that would force you to refactor a lot of existing code
 
   - L — Liskov substitution principle
 
@@ -85,14 +99,14 @@ Data structures: array, stack, queue, linked-list, tree, hash table (map), set
 
   - I — Interface segregation principle
 
-    A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do  not use.
+    A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
 
   - D — Dependency Inversion principle
 
-    *high level modules shouldn’t depend upon low level modules* is, however, relevant. ????
+    _high level modules shouldn’t depend upon low level modules_ is, however, relevant. ????
 
-  
 ### FP
+
 https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0
 
 - **Pure functions**
@@ -106,17 +120,15 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
     - DOM
     - Timestamps
     - Random numbers
-	- Doesn't mutate input
-	
+  - Doesn't mutate input
+
 - **Immutability**
 
 - **Functions as first-class entities**
 
-  JavaScript has **first class functions**,  which allows us to treat functions as data — assign them to variables,  pass them to other functions, return them from functions, etc…
+  JavaScript has **first class functions**, which allows us to treat functions as data — assign them to variables, pass them to other functions, return them from functions, etc…
 
 - Functions composition
-
-  
 
 - High order functions
 
@@ -133,19 +145,19 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
 
   ```ts
   // Originally inspired by  David Walsh (https://davidwalsh.name/javascript-debounce-function)
-  
+
   // Returns a function, that, as long as it continues to be invoked, will not
   // be triggered. The function will be called after it stops being called for
   // `wait` milliseconds.
   const debounce = (func: Function, wait: number) => {
     let timeout;
-  
+
     return function executedFunction(...args) {
       const later = () => {
         clearTimeout(timeout);
         func(...args);
       };
-  
+
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
     };
@@ -156,27 +168,25 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
 
   ```js
   // https://javascript.info/currying-partials
-  
+
   function log(date, importance, message) {
-    alert(`[${date.getHours()}:${date.getMinutes()}] [${importance}] ${message}`);
+    alert(
+      `[${date.getHours()}:${date.getMinutes()}] [${importance}] ${message}`
+    );
   }
-  
+
   log = _.curry(log);
-  
-  log(new Date(), "DEBUG", "some debug"); // log(a, b, c)
-  
-  log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
-  
+
+  log(new Date(), 'DEBUG', 'some debug'); // log(a, b, c)
+
+  log(new Date())('DEBUG')('some debug'); // log(a)(b)(c)
+
   // logNow will be the partial of log with fixed first argument
   let logNow = log(new Date());
-  
+
   // use it
-  logNow("INFO", "message"); // [HH:mm] INFO message
+  logNow('INFO', 'message'); // [HH:mm] INFO message
   ```
-
-  
-
-
 
 ## Frameworks and Tools
 
@@ -228,6 +238,8 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
 - Intermediate understanding of:
   - Browser API (Console, Fetch, Storage, History)
   - BOM, DOM, CSSOM
+
+## Webpack
 
 ## Tools (NPM, Webpack, Chrome DevTools, ...)
 
@@ -285,9 +297,8 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
   - Basic understanding of:
 
     - Responsive vs Adaptive design, Mobile First approach, Desktop First
+
 - Progressive Enhancement vs Graceful Degradation approaches1
-
-
 
 ## Git workflow
 
@@ -333,3 +344,4 @@ The overall flow of Gitflow is:
 6. If an issue in `master` is detected a `hotfix` branch is created from `master`
 7. Once the `hotfix` is complete it is merged to both `develop`and `master`
 
+## React
