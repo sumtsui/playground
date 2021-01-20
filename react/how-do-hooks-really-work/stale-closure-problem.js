@@ -14,3 +14,5 @@ console.log(foo); // logs 0 - oops!!
 // when change state from a function to a variable, we encounter the stale closure problem
 // When we destructured foo from the output of useState, it refers to the _val as of the initial useState call…
 // and never changes again! This is not what we want; we generally need our component state to reflect the current state, while being just a variable instead of a function call!
+
+// https://dmitripavlutin.com/react-hooks-stale-closures/

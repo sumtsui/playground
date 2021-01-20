@@ -12,7 +12,22 @@ The **`Map`** object holds key-value pairs and remembers the original insertion 
 
 ### WeakMap
 
+The WeakMap object is a collection of key/value pairs in which the keys are objects only and the values can be arbitrary values. The object references in the keys are held weakly, meaning that they are a target of garbage collection (GC) if there is no other reference to the object anymore. The WeakMap API is the same as the Map API.
+
+One difference to Map objects is that WeakMap keys are not enumerable (i.e., there is no method giving you a list of the keys). If they were, the list would depend on the state of garbage collection, introducing non-determinism.
+
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections#weakmap_object
+
+### Set
+
+Array and Set compared
+
+Traditionally, a set of elements has been stored in arrays in JavaScript in a lot of situations. The new Set object, however, has some advantages:
+
+Deleting Array elements by value (arr.splice(arr.indexOf(val), 1)) is very slow.
+Set objects let you delete elements by their value. With an array, you would have to splice based on an element's index.
+The value NaN cannot be found with indexOf in an array.
+Set objects store unique values. You don't have to manually keep track of duplicates.
 
 ### Symbol
 
@@ -128,7 +143,7 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
 
   JavaScript has **first class functions**, which allows us to treat functions as data — assign them to variables, pass them to other functions, return them from functions, etc…
 
-- Functions composition
+  - Functions composition
 
 - High order functions
 
