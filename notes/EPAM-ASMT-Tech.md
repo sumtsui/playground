@@ -6,11 +6,11 @@
 
 # OOP
 
-### Encapsulation
+## Encapsulation
 
 is one of the fundamentals of **OOP**. It refers to the bundling of data with the methods that operate on that data. **Encapsulation** is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
 
-### ABSTRACTION
+## ABSTRACTION
 
 is that "shows" only essential attributes and "hides" unnecessary information. The main purpose of abstraction is hiding the unnecessary details from the **users**.
 https://stackoverflow.com/questions/46041202/how-does-abstraction-helps-in-hiding-the-implementation-details-in-java/46041373#46041373
@@ -60,23 +60,23 @@ here `BankComparisonEngine` is the user.
 
 Abstraction is a way of creating a simple model of a more complex real-world entities, which contains the only important properties from the perspective of the context of an application.
 
-### Inheritance
+## Inheritance
 
 is when a class derives from another class. The child class will **inherit** all the public and protected properties and methods from the parent class. In addition, it can have its own properties and methods.
 
-### Polymorphism
+## Polymorphism
 
 describes the concept that different classes can be used with the same interface. Each of these classes can provide its own implementation of the interface.
 
 https://medium.com/@viktor.kukurba/object-oriented-programming-in-javascript-3-polymorphism-fb564c9f1ce8
 
-### SOLID
+## SOLID
 
 https://medium.com/@cramirez92/s-o-l-i-d-the-first-5-priciples-of-object-oriented-design-with-javascript-790f6ac9b9fa
 
 https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#toc-single-responsibility-principle
 
-#### Single responsibility principle
+### Single responsibility principle
 
 https://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074
 
@@ -113,7 +113,7 @@ class Book {
 
 `getLocation` can be useful for a `LibraryManager` consumer, but `eReader` and `onlineStore` class don't need this method, so better let other class take care this responsibility.
 
-#### Open closed principle
+### Open closed principle
 
 Write your code so that your user can use it to do new things without you the author to modifying the code.
 The open-closed principle suggests that you should prefer things with extensible behavior so that you don't have to modify their source code when you need them to do new things.
@@ -128,17 +128,85 @@ So, OCP and IoC are related in a very simple way: OCP is a goal, and IoC is the 
 
 https://www.baeldung.com/java-open-closed-principle
 
-##### Liskov substitution principle
+### Liskov substitution principle
 
-Every subclass/derived class should be substitutable for their base/parent class.
+https://code.tutsplus.com/tutorials/solid-part-3-liskov-substitution-interface-segregation-principles--net-36710
+
+Every subclass class should be substitutable for their base/parent class.
 
 A subclass should override the parent class methods in a way that does **not break functionality from a client’s point of view**.
 
-#### Interface segregation principle
+In normal sense, subclass should not break a client function which takes the parent class.
+
+```php
+class Rectangle {
+
+  private $topLeft;
+  private $width;
+  private $height;
+
+  public function setHeight($height) {
+      $this->height = $height;
+  }
+
+  public function getHeight() {
+      return $this->height;
+  }
+
+  public function setWidth($width) {
+      $this->width = $width;
+  }
+
+  public function getWidth() {
+      return $this->width;
+  }
+
+  function area() {
+    return $this->width * $this->height;
+  }
+
+}
+
+class Square extends Rectangle {
+
+  public function setHeight($value) {
+      $this->width = $value;
+      $this->height = $value;
+  }
+
+  public function setWidth($value) {
+      $this->width = $value;
+      $this->height = $value;
+  }
+}
+```
+
+Notice how `Square` implements `setHeight` and `setWidth`.
+
+if the user has a function to check the area:
+
+```php
+function areaVerifier(Rectangle $r) {
+  $r->setWidth(5);
+  $r->setHeight(4);
+
+  if($r->area() != 20) {
+      throw new Exception('Bad area!');
+  }
+
+  return true;
+}
+```
+
+`Square` will fail.
+
+### Interface segregation principle
+
+The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication.
 
 A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
 
-##### Dependency Inversion principle
+### Dependency Inversion principle
 
 https://tsh.io/blog/dependency-injection-in-node-js/
 
