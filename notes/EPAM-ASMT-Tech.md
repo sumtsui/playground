@@ -1,10 +1,189 @@
-React, NodeJS / Express, JS (OOP)
+# Security
 
-## Security
+# React
+
+# Webpack
+
+# OOP
+
+### Encapsulation
+
+is one of the fundamentals of **OOP**. It refers to the bundling of data with the methods that operate on that data. **Encapsulation** is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
+
+### ABSTRACTION
+
+is that "shows" only essential attributes and "hides" unnecessary information. The main purpose of abstraction is hiding the unnecessary details from the **users**.
+https://stackoverflow.com/questions/46041202/how-does-abstraction-helps-in-hiding-the-implementation-details-in-java/46041373#46041373
+
+```java
+abstract class Bank
+{
+    abstract int getRateOfInterest();
+}
+
+class SBI extends Bank
+{
+    int getRateOfInterest()
+    {
+        return 7;
+    }
+}
+
+class PNB extends Bank
+{
+    int getRateOfInterest()
+    {
+        return 8;
+    }
+}
+
+class BankComparisonEngine {
+    public Integer getRate(Bank bank) {
+        int rate = bank.getRateOfInterest();
+        return rate;
+    }
+}
+
+class Main{
+    public static void main(String args[])
+    {
+        final BankComparisonEngine bce = new BankComparisonEngine();
+        final Integer rate1 = bce.getRate(new SBI());
+        final Integer rate2 = bce.getRate(new PNB());
+        System.out.println("rate1: " + rate1);
+        System.out.println("rate2: " + rate2);
+    }
+}
+```
+
+here `BankComparisonEngine` is the user.
+
+Abstraction is a way of creating a simple model of a more complex real-world entities, which contains the only important properties from the perspective of the context of an application.
+
+### Inheritance
+
+is when a class derives from another class. The child class will **inherit** all the public and protected properties and methods from the parent class. In addition, it can have its own properties and methods.
+
+### Polymorphism
+
+describes the concept that different classes can be used with the same interface. Each of these classes can provide its own implementation of the interface.
+
+https://medium.com/@viktor.kukurba/object-oriented-programming-in-javascript-3-polymorphism-fb564c9f1ce8
+
+### SOLID
+
+https://medium.com/@cramirez92/s-o-l-i-d-the-first-5-priciples-of-object-oriented-design-with-javascript-790f6ac9b9fa
+
+https://www.digitalocean.com/community/conceptual_articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design#toc-single-responsibility-principle
+
+#### Single responsibility principle
+
+https://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074
+
+A class should have one job only. To deside a class's responsibility, you should think about the potential consumers of this class. There might be multiple consumers of the class. You should implement your class in a way that all methods and properties are useful for the consumers and nothing more.
+
+For example,
+
+```js
+class Book {
+
+    function getTitle() {
+        return "A Great Book";
+    }
+
+    function getAuthor() {
+        return "John Doe";
+    }
+
+    function turnPage() {
+        // pointer to next page
+    }
+
+    function getCurrentPage() {
+        return "current page content";
+    }
+
+    function getLocation() {
+        // returns the position in the library
+        // ie. shelf number & room number
+    }
+
+}
+```
+
+`getLocation` can be useful for a `LibraryManager` consumer, but `eReader` and `onlineStore` class don't need this method, so better let other class take care this responsibility.
+
+#### Open closed principle
+
+Write your code so that your user can use it to do new things without you the author to modifying the code.
+The open-closed principle suggests that you should prefer things with extensible behavior so that you don't have to modify their source code when you need them to do new things.
+
+When you do it right, inversion of control is simultaneously the simplest and most powerful way to provide this extensibility.
+
+It's the simplest way, because when you define an injectible interface for IoC, you only capture your requirements. Other methods of configuring extensible behavior require you to think about everything consumers might want.
+
+It's the most powerful way, because code can do anything, and providing an IoC extension point allows consumers to do all kinds of things you haven't imagined, so long as they satisfy the requirements defined by your interface. Again this is because the injected interface only captures your own needs.
+
+So, OCP and IoC are related in a very simple way: OCP is a goal, and IoC is the means to accomplish it.
+
+https://www.baeldung.com/java-open-closed-principle
+
+##### Liskov substitution principle
+
+Every subclass/derived class should be substitutable for their base/parent class.
+
+A subclass should override the parent class methods in a way that does **not break functionality from a client’s point of view**.
+
+#### Interface segregation principle
+
+A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
+
+##### Dependency Inversion principle
+
+https://tsh.io/blog/dependency-injection-in-node-js/
+
+https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
+
+**There are basically three types of dependency injection:**
+
+1. **constructor injection:** the dependencies are provided through a class constructor.
+2. **setter injection:** the client exposes a setter method that the injector uses to inject the dependency.
+3. **interface injection:** the dependency provides an injector method that will inject the dependency into any client passed to it. Clients must implement an interface that exposes a [setter method](https://en.wikipedia.org/wiki/Setter_method) that accepts the dependency.
+
+**So now its the dependency injection’s responsibility to:**
+
+1. Create the objects
+2. Know which classes require those objects
+3. And provide them all those objects
+
+This states that a class should not configure its dependencies statically but should be configured by some other class from outside.
+
+It is the fifth principle of **S.O.L.I.D** — the five basic principles of object-oriented programming and design by [**Uncle Bob**](https://en.wikipedia.org/wiki/Robert_C._Martin) — which states that a class should depend on abstraction and not upon concretions (in simple terms, hard-coded).
+
+According to the principles, a class should concentrate on fulfilling its responsibilities and not on creating objects that it requires to fulfill those responsibilities. And that’s where **dependency injection** comes into play: it provides the class with the required objects.
+
+#### Benefits of using DI
+
+1. Helps in Unit testing.
+2. Boiler plate code is reduced, as initializing of dependencies is done by the injector component.
+3. Extending the application becomes easier.
+4. Helps to enable loose coupling, which is important in application programming.
+
+#### Disadvantages of DI
+
+1. It’s a bit complex to learn, and if overused can lead to management issues and other problems.
+2. Many compile time errors are pushed to run-time.
+3. Dependency injection frameworks are implemented with reflection or dynamic programming. This can hinder use of IDE automation, such as “find references”, “show call hierarchy” and safe refactoring.
+
+## Browser render page!!
+
+## Jest!!
+
+## Git flow!!
+
+---
 
 ## JS Core at Advanced level
-
-### this
 
 ### Map
 
@@ -43,6 +222,8 @@ https://medium.com/javascript-scene/javascript-factory-functions-vs-constructor-
 
 ## Knowing the pros and cons of using TypeScript on the project
 
+https://dev.to/macsikora/no-typescript-is-not-oop-version-of-javascript-3ed4
+
 https://www.altexsoft.com/blog/typescript-pros-and-cons/
 
 ### Pros
@@ -79,46 +260,6 @@ Data structures: array, stack, queue, linked-list, tree, hash table (map), set
 
 - Understands main concepts of FP/FRP
 - Able to compare OOP/FP/FRP, mention pros/cons
-
-### OOP
-
-- **Encapsulation** is one of the fundamentals of **OOP**. It refers to the bundling of data with the methods that operate on that data. **Encapsulation** is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
-
-- **ABSTRACTION** is that "shows" only essential attributes and "hides" unnecessary information. The main purpose of abstraction is hiding the unnecessary details from the users.
-
-- **Inheritance** is when a class derives from another class. The child class will **inherit** all the public and protected properties and methods from the parent class. In addition, it can have its own properties and methods.
-
-- **Polymorphism** describes the concept that different classes can be used with the same interface. Each of these classes can provide its own implementation of the interface.
-
-  https://medium.com/@viktor.kukurba/object-oriented-programming-in-javascript-3-polymorphism-fb564c9f1ce8
-
-- **Dependency injection**, https://tsh.io/blog/dependency-injection-in-node-js/
-
-- **SOLID**, https://medium.com/@cramirez92/s-o-l-i-d-the-first-5-priciples-of-object-oriented-design-with-javascript-790f6ac9b9fa
-
-  - S — Single responsibility principle
-
-    A class should have one job only.
-
-  - O — Open closed principle
-
-    Open for extension means that we should be able to add new features or components to the application **without breaking** existing code.
-
-    Closed for modification means that **we should not introduce breaking changes to existing functionality**, because that would force you to refactor a lot of existing code
-
-  - L — Liskov substitution principle
-
-    Every subclass/derived class should be substitutable for their base/parent class.
-
-    A subclass should override the parent class methods in a way that does **not break functionality from a client’s point of view**.
-
-  - I — Interface segregation principle
-
-    A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
-
-  - D — Dependency Inversion principle
-
-    _high level modules shouldn’t depend upon low level modules_ is, however, relevant. ????
 
 ### FP
 
