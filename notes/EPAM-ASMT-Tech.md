@@ -10,6 +10,31 @@
 
 is one of the fundamentals of **OOP**. It refers to the bundling of data with the methods that operate on that data. **Encapsulation** is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
 
+https://medium.com/javascript-scene/encapsulation-in-javascript-26be60e325b4
+
+#### Real Encapsulation in JavaScript
+
+```js
+const createCounter = () => {
+  // A variable defined in a factory or constructor function scope
+  // is private to that function.
+  let count = 0;
+  return {
+    // Any other functions defined in the same scope are privileged:
+    // These both have access to the private `count` variable
+    // defined anywhere in their scope chain (containing function
+    // scopes).
+    click: () => (count += 1),
+    getCount: () => count.toLocaleString(),
+  };
+};
+const counter = createCounter();
+counter.click();
+counter.click();
+counter.click();
+console.log(counter.getCount());
+```
+
 ## ABSTRACTION
 
 is that "shows" only essential attributes and "hides" unnecessary information. The main purpose of abstraction is hiding the unnecessary details from the **users**.
@@ -132,7 +157,7 @@ https://www.baeldung.com/java-open-closed-principle
 
 https://code.tutsplus.com/tutorials/solid-part-3-liskov-substitution-interface-segregation-principles--net-36710
 
-Every subclass class should be substitutable for their base/parent class.
+Every subclass should be substitutable for their base/parent class.
 
 A subclass should override the parent class methods in a way that does **not break functionality from a client’s point of view**.
 
@@ -202,46 +227,58 @@ function areaVerifier(Rectangle $r) {
 
 ### Interface segregation principle
 
-The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication.
+*The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication.*
+
+It promotes the idea that interfaces should reflect the needs of the clients.
 
 A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
 
+If you have one class `Vehicle`, which has a lot of methods and will be consumed by a lot of different clients (e.g. BusStation, HighWay, Driver). The easiest thing to do is to provide a single interface with all the implementations and let the clients, in our case `BusStation`, `HighWay`, `Driver`and so on, to use whatever thew want from the interface's implementation. Basically, this shifts the behavior selection responsibility to the clients. You can find this kind of solution in many older applications:
+
+![bad](https://cdn.tutsplus.com/net/uploads/2014/01/oneInterfaceManyClients.png)
+
+However, this solution has its problems. Now all the clients depend on all the methods. Why should a `BusStation` depend on the state of lights of the bus, or on the radio channels selected by the driver? It should not. But what if it does? Does it matter? Well, if we think about the Single Responsibility Principle, it is a sister concept to this one. If `BusStation` depends on many individual implementations, not even used by it, it may require changes if any of the individual small implementations change.
+
+Interfaces belong to their clients and not to the implementations. Thus, we should always design them in a way to best suite our clients. Some times we can, some times we can not exactly know our clients. But when we can, we should break our interfaces in many smaller ones, so they better satisfy the exact needs of our clients:
+
+![good way](https://cdn.tutsplus.com/net/uploads/2014/01/specializedImplementationInterface.png)
+
+Of course, this will lead to some degree of duplication. But remember! Interfaces are just plain function name definitions. There is no implementation of any kind of logic in them. So the duplications is small and manageable.
+
+Then, we have the great advantage of clients depending only and only on what they actually need and use. In some cases, clients may use and need several interfaces, that is OK, as long as they use all the methods from all the interfaces they depend on.
+
+Another nice trick is that in our business logic, a single class can implement several interfaces if needed. So we can provide a single implementation for all the common methods between the interfaces. The segregated interfaces will also force us to think of our code more from the client's point of view, which will in turn lead to loose coupling and easy testing. So, not only have we made our code better to our clients, we also made it easier for ourselves to understand, test and implement.
+
 ### Dependency Inversion principle
 
-https://tsh.io/blog/dependency-injection-in-node-js/
+https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872
 
-https://www.freecodecamp.org/news/a-quick-intro-to-dependency-injection-what-it-is-and-when-to-use-it-7578c84fa88f/
+*A. High-level modules should not depend on low-level modules. Both should depend on abstractions.*
+B. Abstractions should not depend upon details. Details should depend upon abstractions.
 
-**There are basically three types of dependency injection:**
+##### Difference Between Injection vs Inversion
 
-1. **constructor injection:** the dependencies are provided through a class constructor.
-2. **setter injection:** the client exposes a setter method that the injector uses to inject the dependency.
-3. **interface injection:** the dependency provides an injector method that will inject the dependency into any client passed to it. Clients must implement an interface that exposes a [setter method](https://en.wikipedia.org/wiki/Setter_method) that accepts the dependency.
+https://medium.com/@kedren.villena/simplifying-dependency-inversion-principle-dip-59228122649a
 
-**So now its the dependency injection’s responsibility to:**
+https://stackoverflow.com/questions/46709170/difference-between-dependency-injection-and-dependency-inversion
 
-1. Create the objects
-2. Know which classes require those objects
-3. And provide them all those objects
+Dependency Injection is an implementation of Dependency Inversion Principle.
 
-This states that a class should not configure its dependencies statically but should be configured by some other class from outside.
 
-It is the fifth principle of **S.O.L.I.D** — the five basic principles of object-oriented programming and design by [**Uncle Bob**](https://en.wikipedia.org/wiki/Robert_C._Martin) — which states that a class should depend on abstraction and not upon concretions (in simple terms, hard-coded).
 
-According to the principles, a class should concentrate on fulfilling its responsibilities and not on creating objects that it requires to fulfill those responsibilities. And that’s where **dependency injection** comes into play: it provides the class with the required objects.
+## OOP vs POP
 
-#### Benefits of using DI
+“Procedural programming is a programming paradigm, derived from structured programming, based upon the concept of the procedure call. Procedures, also known as routines, subroutines, or functions, simply contain a series of computational steps to be carried out.”
 
-1. Helps in Unit testing.
-2. Boiler plate code is reduced, as initializing of dependencies is done by the injector component.
-3. Extending the application becomes easier.
-4. Helps to enable loose coupling, which is important in application programming.
-
-#### Disadvantages of DI
-
-1. It’s a bit complex to learn, and if overused can lead to management issues and other problems.
-2. Many compile time errors are pushed to run-time.
-3. Dependency injection frameworks are implemented with reflection or dynamic programming. This can hinder use of IDE automation, such as “find references”, “show call hierarchy” and safe refactoring.
+| Sr. No. |          Key          |                           OOP                           |                          POP                           |
+| ------- | :-------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
+| 1       |      Definition       |       OOP stands for Object Oriented Programing.        |    POP stands for Procedural Oriented Programming.     |
+| 2       |       Approach        |             OOP follows bottom up approach.             |             POP follows top down approach.             |
+| 3       |       Division        | A program is divided to objects and their interactions. | A program is divided into funtions and they interacts. |
+| 4       | Inheritance supported |                Inheritance is supported.                |             Inheritance is not supported.              |
+| 5       |    Access control     |    Access control is supported via access modifiers.    |           No access modifiers are supported.           |
+| 6       |      Data Hiding      |           Encapsulation is used to hide data.           |  No data hiding present. Data is globally accessible.  |
+| 7       |        Example        |                        C++, Java                        |                       C, Pascal                        |
 
 ## Browser render page!!
 
