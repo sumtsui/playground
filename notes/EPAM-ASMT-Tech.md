@@ -264,7 +264,9 @@ https://stackoverflow.com/questions/46709170/difference-between-dependency-injec
 
 Dependency Injection is an implementation of Dependency Inversion Principle.
 
+IoC: decouple the execution of a task from its implementation (i.e.` setTimeout(task, time)`)
 
+DI: a method to satisfying IoC by injecting dependencies into an object, either through the constructor or by setting properties.
 
 ## OOP vs POP
 
@@ -280,11 +282,16 @@ Dependency Injection is an implementation of Dependency Inversion Principle.
 | 6       |      Data Hiding      |           Encapsulation is used to hide data.           |  No data hiding present. Data is globally accessible.  |
 | 7       |        Example        |                        C++, Java                        |                       C, Pascal                        |
 
-## Browser render page!!
+## Browser render page
 
-## Jest!!
+## Jest
 
-## Git flow!!
+## Git flow
+
+## React vs Vue vs Angular
+
+They are all declarative, support data-binding, separate view and data
+
 
 ---
 
@@ -544,23 +551,6 @@ https://medium.com/javascript-scene/master-the-javascript-interview-what-is-func
 
 - Intermediate knowledge of at least some CSS methodologies (BEM, OOCSS, SMACSS, ITCSS, Atomic CSS)
 
-## Web Animations
-
-- Able to implement animations via CSS and JS
-- Intermediate understanding pros/cons of animation via CSS or JS
-
-## Responsive design
-
-- Intermediate knowledge of CSS media queries
-
-  - Able to build responsive web pages
-
-  - Basic understanding of:
-
-    - Responsive vs Adaptive design, Mobile First approach, Desktop First
-
-- Progressive Enhancement vs Graceful Degradation approaches1
-
 ## Git workflow
 
 https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
@@ -605,4 +595,3 @@ The overall flow of Gitflow is:
 6. If an issue in `master` is detected a `hotfix` branch is created from `master`
 7. Once the `hotfix` is complete it is merged to both `develop`and `master`
 
-## React
