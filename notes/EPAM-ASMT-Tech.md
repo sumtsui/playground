@@ -91,9 +91,33 @@ is when a class derives from another class. The child class will **inherit** all
 
 ## Polymorphism
 
-describes the concept that different classes can be used with the same interface. Each of these classes can provide its own implementation of the interface.
+describes the concept that different classes can be used with the same interface. 
 
-https://medium.com/@viktor.kukurba/object-oriented-programming-in-javascript-3-polymorphism-fb564c9f1ce8
+Each of these classes can provide its own implementation of the interface.
+
+https://stackify.com/oop-concept-polymorphism/
+
+Java supports two kinds of polymorphism. 
+
+1. You can overload a method with different sets of parameters. This is  called static polymorphism because the compiler statically binds the  method call to a specific method.
+2. Within an inheritance hierarchy, a subclass can override a method of its superclass. If you instantiate the subclass, the JVM will always call  the overridden method, even if you cast the subclass to its superclass.  That is called dynamic polymorphism.
+
+#### Is there funciton overloading in js?
+
+https://stackoverflow.com/questions/456177/function-overloading-in-javascript-best-practices
+
+There is no real function overloading in JavaScript since it allows to pass any number of parameters of any type.
+
+Some ppl do it like this, 
+
+```js
+function foo(a, b, opts) {
+  // ...
+  if (opts['test']) { } //if test param exists, do something.. 
+}
+```
+
+All function calls have same args length but the last arg is an object and can hold anything. 
 
 ## SOLID
 
@@ -229,7 +253,7 @@ function areaVerifier(Rectangle $r) {
 
 *The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication.*
 
-It promotes the idea that interfaces should reflect the needs of the clients.
+**It promotes the idea that interfaces should reflect the needs of the clients.**
 
 A client should never be forced to implement an interface that it doesn’t use or clients shouldn’t be forced to depend on methods they do not use.
 
@@ -239,7 +263,7 @@ If you have one class `Vehicle`, which has a lot of methods and will be consumed
 
 However, this solution has its problems. Now all the clients depend on all the methods. Why should a `BusStation` depend on the state of lights of the bus, or on the radio channels selected by the driver? It should not. But what if it does? Does it matter? Well, if we think about the Single Responsibility Principle, it is a sister concept to this one. If `BusStation` depends on many individual implementations, not even used by it, it may require changes if any of the individual small implementations change.
 
-Interfaces belong to their clients and not to the implementations. Thus, we should always design them in a way to best suite our clients. Some times we can, some times we can not exactly know our clients. But when we can, we should break our interfaces in many smaller ones, so they better satisfy the exact needs of our clients:
+**Interfaces belong to their clients and not to the implementations.** Thus, we should always design them in a way to best suite our clients. Some times we can, some times we can not exactly know our clients. But when we can, we should break our interfaces in many smaller ones, so they better satisfy the exact needs of our clients:
 
 ![good way](https://cdn.tutsplus.com/net/uploads/2014/01/specializedImplementationInterface.png)
 
