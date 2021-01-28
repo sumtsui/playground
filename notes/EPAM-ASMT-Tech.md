@@ -282,15 +282,17 @@ DI: a method to satisfying IoC by injecting dependencies into an object, either 
 | 6       |      Data Hiding      |           Encapsulation is used to hide data.           |  No data hiding present. Data is globally accessible.  |
 | 7       |        Example        |                        C++, Java                        |                       C, Pascal                        |
 
-## Browser render page
+## FP
 
 ## Jest
 
-## Git flow
+## Browser render page
 
-## React vs Vue vs Angular
+## React vs Vue
 
 They are all declarative, support data-binding, separate view and data
+
+## Git flow
 
 
 ---
