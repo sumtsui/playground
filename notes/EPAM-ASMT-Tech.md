@@ -227,7 +227,7 @@ function areaVerifier(Rectangle $r) {
 
 ### Interface segregation principle
 
-*The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication.*
+_The Single Responsibility Principle is about actors and high level architecture. The Open/Closed Principle is about class design and feature extensions. The Liskov Substitution Principle is about subtyping and inheritance. The Interface Segregation Principle (ISP) is about business logic to clients communication._
 
 It promotes the idea that interfaces should reflect the needs of the clients.
 
@@ -253,7 +253,7 @@ Another nice trick is that in our business logic, a single class can implement s
 
 https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872
 
-*A. High-level modules should not depend on low-level modules. Both should depend on abstractions.*
+_A. High-level modules should not depend on low-level modules. Both should depend on abstractions._
 B. Abstractions should not depend upon details. Details should depend upon abstractions.
 
 ##### Difference Between Injection vs Inversion
@@ -268,21 +268,7 @@ IoC: decouple the execution of a task from its implementation (i.e.` setTimeout(
 
 DI: a method to satisfying IoC by injecting dependencies into an object, either through the constructor or by setting properties.
 
-## OOP vs POP
-
-“Procedural programming is a programming paradigm, derived from structured programming, based upon the concept of the procedure call. Procedures, also known as routines, subroutines, or functions, simply contain a series of computational steps to be carried out.”
-
-| Sr. No. |          Key          |                           OOP                           |                          POP                           |
-| ------- | :-------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
-| 1       |      Definition       |       OOP stands for Object Oriented Programing.        |    POP stands for Procedural Oriented Programming.     |
-| 2       |       Approach        |             OOP follows bottom up approach.             |             POP follows top down approach.             |
-| 3       |       Division        | A program is divided to objects and their interactions. | A program is divided into funtions and they interacts. |
-| 4       | Inheritance supported |                Inheritance is supported.                |             Inheritance is not supported.              |
-| 5       |    Access control     |    Access control is supported via access modifiers.    |           No access modifiers are supported.           |
-| 6       |      Data Hiding      |           Encapsulation is used to hide data.           |  No data hiding present. Data is globally accessible.  |
-| 7       |        Example        |                        C++, Java                        |                       C, Pascal                        |
-
-## FP
+## Browser render page
 
 ## Jest
 
@@ -293,7 +279,6 @@ DI: a method to satisfying IoC by injecting dependencies into an object, either 
 They are all declarative, support data-binding, separate view and data
 
 ## Git flow
-
 
 ---
 
@@ -597,3 +582,16 @@ The overall flow of Gitflow is:
 6. If an issue in `master` is detected a `hotfix` branch is created from `master`
 7. Once the `hotfix` is complete it is merged to both `develop`and `master`
 
+## OOP vs POP
+
+“Procedural programming is a programming paradigm, derived from structured programming, based upon the concept of the procedure call. Procedures, also known as routines, subroutines, or functions, simply contain a series of computational steps to be carried out.”
+
+| Sr. No. |          Key          |                           OOP                           |                          POP                           |
+| ------- | :-------------------: | :-----------------------------------------------------: | :----------------------------------------------------: |
+| 1       |      Definition       |       OOP stands for Object Oriented Programing.        |    POP stands for Procedural Oriented Programming.     |
+| 2       |       Approach        |             OOP follows bottom up approach.             |             POP follows top down approach.             |
+| 3       |       Division        | A program is divided to objects and their interactions. | A program is divided into funtions and they interacts. |
+| 4       | Inheritance supported |                Inheritance is supported.                |             Inheritance is not supported.              |
+| 5       |    Access control     |    Access control is supported via access modifiers.    |           No access modifiers are supported.           |
+| 6       |      Data Hiding      |           Encapsulation is used to hide data.           |  No data hiding present. Data is globally accessible.  |
+| 7       |        Example        |                        C++, Java                        |                       C, Pascal                        |
