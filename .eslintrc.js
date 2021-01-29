@@ -9,10 +9,9 @@ module.exports = {
     jest: true,
   },
   reportUnusedDisableDirectives: true,
-  // ignorePatterns: ['build/', 'node_modules/'],
   root: true,
   rules: {
-    'indent': ['error', 2],
+    '@typescript-eslint/indent': ['error', 2],
     'keyword-spacing': 2,
     'no-unused-vars': 'warn',
     'quote-props': ['error', 'consistent-as-needed'],
