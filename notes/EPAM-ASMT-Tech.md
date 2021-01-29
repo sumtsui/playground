@@ -253,12 +253,12 @@ Another nice trick is that in our business logic, a single class can implement s
 
 https://code.tutsplus.com/tutorials/solid-part-4-the-dependency-inversion-principle--net-36872
 
+https://medium.com/@kedren.villena/simplifying-dependency-inversion-principle-dip-59228122649a
+
 _A. High-level modules should not depend on low-level modules. Both should depend on abstractions._
 B. Abstractions should not depend upon details. Details should depend upon abstractions.
 
 ##### Difference Between Injection vs Inversion
-
-https://medium.com/@kedren.villena/simplifying-dependency-inversion-principle-dip-59228122649a
 
 https://stackoverflow.com/questions/46709170/difference-between-dependency-injection-and-dependency-inversion
 
