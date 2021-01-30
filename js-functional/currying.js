@@ -1,9 +1,11 @@
-const fetchMock = (url, config) =>
-  Promise.resolve([
+const fetchMock = (url, config) => {
+  console.log(url, config);
+  return Promise.resolve([
     { amount: 10, price: 80 },
     { amount: 4, price: 120 },
     { amount: 7, price: 90 },
   ]);
+};
 
 const request = (defaults) => (options) => {
   options = Object.assign({}, defaults, options);
@@ -43,3 +45,14 @@ customRequest({ url: '/so/custom/url' })
   becomes
   [80, 120, 90]
  */
+
+/**
+ * We are iterating the array 3 times, not good enough
+ * here comes composing!!
+ */
+
+const compose = require('./compose');
+
+customRequest({ url: '/so/custom/url' })
+  .then(map(compose(discount, tax, pluck('price'))))
+  .then((result) => console.log(result));

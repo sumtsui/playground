@@ -68,13 +68,13 @@ immutable.js
 
 # pros
 
+predictable
+
 safety
 
-expliit flow of data
+transparent, explict flow of data
 
-free undo/redo logs - redux
-
-concurrency safety
+modular
 
 # cons
 

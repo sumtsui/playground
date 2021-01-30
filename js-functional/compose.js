@@ -7,8 +7,8 @@ const users = [
   { name: 'Milady', age: 22 },
 ];
 
-const compose = (...functions) => (args) =>
-  functions.reduceRight((arg, fn) => fn(arg), args);
+const compose = (...fns) => (args) =>
+  fns.reduceRight((arg, fn) => fn(arg), args);
 
 // const filter = (cb, arr) => arr.filter(cb);
 // const map = (cb, arr) => arr.map(cb);
@@ -49,3 +49,5 @@ const reduceWords = reduce((acc, curr) => (acc += curr));
 const result3 = compose(reduceWords, mapWords)(['foo', 'bar', 'baz']); //3
 
 console.log('result3', result3);
+
+module.exports = compose;

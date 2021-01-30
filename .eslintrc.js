@@ -1,7 +1,11 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
   env: {
     node: true,
     browser: true,
@@ -12,6 +16,7 @@ module.exports = {
   root: true,
   rules: {
     '@typescript-eslint/indent': ['error', 2],
+    // 'newline-per-chained-call': 'error',
     'keyword-spacing': 2,
     'no-unused-vars': 'warn',
     'quote-props': ['error', 'consistent-as-needed'],
