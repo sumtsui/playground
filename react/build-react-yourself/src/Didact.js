@@ -1,3 +1,5 @@
+// https://pomb.us/build-your-own-react/
+
 function createElement(type, props, ...children) {
   return {
     type,
