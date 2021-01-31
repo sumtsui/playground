@@ -19,7 +19,8 @@
   "scripts": {
     "test": "jest --watch",
     "start": "node server.js",
-    "ts": "tsc --project typescript/tsconfig.json -w"
+    "ts": "tsc --project typescript/tsconfig.json -w",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",

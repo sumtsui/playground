@@ -1,32 +1,31 @@
-import Didact from './Didact';
-
+// https://pomb.us/build-your-own-react/
 /** @jsx Didact.createElement */
-const element = (
-  <div id="foo">
-    <div>
-      <h1>
-        <p />
-        <a />
-      </h1>
-      <h2></h2>
-    </div>
-  </div>
-);
-/**
- * Babel will transform the above code into:
- * */
-// const elementProccessedByBabel = Didact.createElement(
-//   'div',
-//   { id: 'foo' },
-//   Didact.createElement('h3', null, 'this is jsx transformed html!'),
-//   Didact.createElement(
-//     'p',
-//     null,
-//     'haha this is ',
-//     Didact.createElement('b', null, 'bar')
-//   ),
-//   Didact.createElement('p', null, 'what up')
-// );
 
+import './styles.css';
+import Didact from './didact';
+
+function App(props) {
+  const [state, setState] = Didact.useState(1);
+
+  return (
+    <h1 onClick={() => setState((c) => c + 1)} class="bar">
+      Hi {props.name} + {state}
+    </h1>
+    // <div>
+    //   <h1 onClick={() => setState((c) => c + 1)}>
+    //     Hi {props.name} + {state}
+    //   </h1>
+    //   <button>Click me</button>
+    //   <p>what is going on?? I am scared!!</p>
+    // </div>
+  );
+}
+
+const element = <App name="foo" />;
 const container = document.getElementById('root');
+
+/**
+ * In the render function we set nextUnitOfWork to the root of the fiber tree.
+ * Then, when the browser is ready,it will call our workLoop and we’ll start working on the root.
+ */
 Didact.render(element, container);
