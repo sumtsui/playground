@@ -4,8 +4,8 @@ https://sinonjs.org/releases/v9.2.1/stubs/
 
 Use a stub when you want to:
 
-1. Control a method’s behavior from a test to force the code down a  specific path. Examples include forcing a method to throw an error in  order to test error handling.
-2. When you want to prevent a specific method from being called  directly (possibly because it triggers undesired behavior, such as a `XMLHttpRequest` or similar).
+1. Control a method’s behavior from a test to force the code down a specific path. Examples include forcing a method to throw an error in order to test error handling.
+2. When you want to prevent a specific method from being called directly (possibly because it triggers undesired behavior, such as a `XMLHttpRequest` or similar).
 
 # Mocking with Jest
 
@@ -23,7 +23,7 @@ The Mock Function provides features to:
 - Set return values
 - Change the implementation
 
-Dependency injection (DI) makes testing easier but often real world code is not written in the ID way.
+Dependency injection (DI) makes testing easier but often real world code is not written in the DI way.
 
 Jest has 3 types of module and function mocking:
 
@@ -39,12 +39,12 @@ https://stackoverflow.com/questions/45111198/how-to-mock-functions-in-the-same-m
 
 ```js
 // module.js
-export function bar () {
-    return 'bar';
+export function bar() {
+  return 'bar';
 }
 
-export function foo () {
-    return `I am foo. bar is ${bar()}`;
+export function foo() {
+  return `I am foo. bar is ${bar()}`;
 }
 ```
 
@@ -53,37 +53,33 @@ export function foo () {
 import * as module from '../src/module';
 
 describe('module', () => {
-    let barSpy;
+  let barSpy;
 
-    beforeEach(() => {
-        barSpy = jest.spyOn(
-            module,
-            'bar'
-        ).mockImplementation(jest.fn());
-    });
+  beforeEach(() => {
+    barSpy = jest.spyOn(module, 'bar').mockImplementation(jest.fn());
+  });
 
+  afterEach(() => {
+    barSpy.mockRestore();
+  });
 
-    afterEach(() => {
-        barSpy.mockRestore();
-    });
+  it('foo', () => {
+    console.log(jest.isMockFunction(module.bar)); // outputs true
 
-    it('foo', () => {
-        console.log(jest.isMockFunction(module.bar)); // outputs true
+    module.bar.mockReturnValue('fake bar');
 
-        module.bar.mockReturnValue('fake bar');
+    console.log(module.bar()); // outputs 'fake bar';
 
-        console.log(module.bar()); // outputs 'fake bar';
-
-        expect(module.foo()).toEqual('I am foo. bar is fake bar');
-        /**
-         * does not work! we get the following:
-         *
-         *  Expected value to equal:
-         *    "I am foo. bar is fake bar"
-         *  Received:
-         *    "I am foo. bar is bar"
-         */
-    });
+    expect(module.foo()).toEqual('I am foo. bar is fake bar');
+    /**
+     * does not work! we get the following:
+     *
+     *  Expected value to equal:
+     *    "I am foo. bar is fake bar"
+     *  Received:
+     *    "I am foo. bar is bar"
+     */
+  });
 });
 ```
 
@@ -93,14 +89,13 @@ Instead, you can:
 
 ```js
 // module.js
-export function bar () {
-    return 'bar';
+export function bar() {
+  return 'bar';
 }
 
-export function foo () {
-    return `I am foo. bar is ${exports.bar()}`;
+export function foo() {
+  return `I am foo. bar is ${exports.bar()}`;
 }
 ```
 
 This will make `foo` use the `bar` method on the exported object. Thus it will work.
-
