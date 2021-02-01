@@ -1,3 +1,4 @@
+// https://dev.to/azure/dependency-injection-in-javascript-101-2b1e
 const log = (str) => console.log(str);
 
 function Wheels() {
@@ -10,8 +11,8 @@ function Pistons() {
   log('Made some pistons.');
 }
 
-function Engine() {
-  this.pistons = new Pistons();
+function Engine(pistons) {
+  this.pistons = pistons;
   this.action = () => {
     this.pistons.action();
     log('The engine goes vroom vroom.');
@@ -19,9 +20,9 @@ function Engine() {
   log('Made an engine.');
 }
 
-function Car() {
-  this.wheels = new Wheels();
-  this.engine = new Engine();
+function Car(wheels, engine) {
+  this.wheels = wheels;
+  this.engine = engine;
   this.action = () => {
     this.wheels.action();
     this.engine.action();

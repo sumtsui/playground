@@ -14,8 +14,8 @@ module.exports = {
     compress: true,
     port: 3000,
   },
+  devtool: 'eval-source-map',
   mode: 'development',
-  // mode: 'production',
   plugins: [
     new html({
       template: 'src/index.html',
@@ -33,6 +33,10 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
