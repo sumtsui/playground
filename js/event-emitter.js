@@ -74,3 +74,5 @@ EventEmitter.prototype.once = function (event, listener) {
     listener.apply(this, arguments);
   });
 };
+
+module.exports = EventEmitter;
