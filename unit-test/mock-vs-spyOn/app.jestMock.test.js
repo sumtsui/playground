@@ -17,6 +17,6 @@ test('calls math.subtract', () => {
 });
 
 test('fetch dog image', () => {
-  app.getDogImage('dog.ceo');
-  expect(fetchDog).toHaveBeenCalledWith('dog.ceo');
+  app.getDogImage(3);
+  expect(fetchDog).toHaveBeenCalledWith(3);
 });
