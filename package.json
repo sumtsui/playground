@@ -26,7 +26,7 @@
   "scripts": {
     "test": "jest --config=jest.config.json",
     "start": "node server.js",
-    "ts": "tsc --project typescript/tsconfig.json -w",
+    "ts": "ts-node-script",
     "lint": "eslint",
     "esm": "rm -rf dist && mkdir dist && babel --plugins @babel/plugin-transform-modules-commonjs --out-dir dist"
   },

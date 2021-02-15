@@ -1,13 +1,20 @@
-function mockPromiseFunction(param) {
-  return new Promise((resolve, reject) => {
+function job(data) {
+  const delay = Math.random() * 2000;
+
+  return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(param)
-    }, 0)
-  })
+      resolve(data);
+    }, delay);
+  });
 }
 
-mockPromiseFunction('hi').then((result) => {
-  console.log('result', result)
-})
+async function doJobs() {
+  const result1 = job(1);
+  const result2 = job(2);
 
-console.log('me first')
+  const final = (await result1) + (await result2);
+
+  console.info('result >>>', final);
+}
+
+doJobs();

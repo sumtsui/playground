@@ -1,8 +1,8 @@
 const fs = require('fs');
 const http = require('http');
-const parseForm = require('body/any');
+const url = require('url');
 
-const fileData = fs.readFileSync('./response.txt', { encoding: 'utf-8' });
+// const fileData = fs.readFileSync('./response.txt', { encoding: 'utf-8' });
 
 // var readStream = fileSystem.createReadStream(filePath);
 // // We replaced all the event handlers with a simple call to readStream.pipe()
@@ -19,28 +19,31 @@ const server = http.createServer((req, res) => {
   console.log(req.method, req.url, req.headers, '\n\n');
   if (req.method === 'GET') {
     if (/\/hello\b/.test(req.url)) {
+      const delay = Math.random() * 2000;
       const data = {
-        message: 'Hi',
+        delay,
+        query: url.parse(req.url, true).query.query,
       };
       res.writeHead(200, {
         'Content-Type': 'application/json',
         'Cache-Control': 'max-age: 0, no-cache',
       });
-      res.end(JSON.stringify(data));
+      setTimeout(() => res.end(JSON.stringify(data)), delay);
+    } else {
+      res.writeHead(400);
+      res.end('wasup');
     }
-  }
-
-  if (req.method === 'POST') {
-    res.writeHead(200, {
-      'XXX-XXX': 'custom',
+  } else if (req.method === 'POST') {
+    let data = '';
+    req.on('data', (chunk) => {
+      data += chunk;
     });
-    parseForm(req, res, (err, params) => {
-      console.log('body:', params);
-      res.end(fileData);
+    req.on('end', () => {
+      res.writeHead(200, {
+        'XXX-XXX': 'custom',
+      });
+      res.end(JSON.parse(data));
     });
-  } else {
-    res.writeHead(400);
-    res.end();
   }
 });
 
