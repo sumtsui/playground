@@ -20,6 +20,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     if (/\/hello\b/.test(req.url)) {
       const delay = Math.random() * 2000;
+      // const delay = 2000;
       const data = {
         delay,
         query: url.parse(req.url, true).query.query,

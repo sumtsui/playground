@@ -1,5 +1,6 @@
-function job(data) {
-  const delay = Math.random() * 2000;
+function getFile(data) {
+  const delay = Math.random() * 5000;
+  // const delay = 3000;
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -8,13 +9,41 @@ function job(data) {
   });
 }
 
-async function doJobs() {
-  const result1 = job(1);
-  const result2 = job(2);
-
-  const final = (await result1) + (await result2);
-
-  console.info('result >>>', final);
+function output(arg) {
+  console.log(arg);
 }
 
-doJobs();
+/**
+ * helper for chaining promises
+ */
+(function () {
+  ['file1', 'file2', 'file3']
+    .map(getFile)
+    .reduce((chain, pr) => {
+      return chain.then(() => pr).then(output);
+    }, Promise.resolve())
+    .then(() => output('complete'));
+})();
+
+/**
+ * manually set a timeout for async function
+ */
+(function () {
+  Promise.race([
+    getFile('myfile'),
+    new Promise((_, reject) => {
+      setTimeout(() => {
+        reject('timeout!!');
+      }, 5000);
+    }),
+  ]).then(success, error);
+
+  function success() {
+    output('success');
+  }
+
+  function error() {
+    output('error');
+  }
+  // })();
+});

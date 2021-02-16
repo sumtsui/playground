@@ -8,54 +8,45 @@ const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
 // getAlbum(33631, 63);
 
-bulkGetData();
+(async function () {
+  await bulkGetData(300, 50);
+})();
+
+function output(arg) {
+  console.log(arg.toString());
+  return Promise.resolve();
+}
 
 function getData(query: number) {
-  requestHttp('localhost', `/hello?query=${query}`, 2001).then(res => console.log(res.toString())).catch(err => console.log(err));
+  return requestHttp('localhost', `/hello?query=${query}`, 2001)
+    .then(output)
+    .catch(err => console.error(err));
 }
 
-function bulkGetData() {
-  const total = 1000;
-  const chunk = 50;
-  const allWorks = [];
-  let work = null;
+async function bulkGetData(total: number, chunk: number) {
+  let works = [];
 
-  let i = 0;
+  let i = 1;
 
-  while (i < total) {
+  while (i <= total) {
+    works.push(i);
+
     if (i % chunk === 0) {
-      work = [];
-      allWorks.push(work);
+      // await works
+      //   .map(getData)
+      //   .reduce((chain, pr) => {
+      //     return chain.then(() => pr).then(output);
+      //   }, Promise.resolve())
+      //   .then(() => output('complete chunk ' + i / chunk));
+
+      await Promise
+        .all(works.map(getData))
+        .then(() => output('complete chunk ' + i / chunk));
+      works = [];
     }
-    const thunk = makeThunkOfActiveLazy(getData, i);
-    work.push(thunk);
+
     i++;
   }
-  
-  Promise.all(allWorks[0]).then(res => console.log('res', res));
-}
-
-function makeThunk(fn, ...args) {
-  return function (cb) {
-    args.push(cb);
-    fn(...args);
-  };
-}
-
-function makeThunkOfActiveLazy(asyncFn, ...args) {
-  let data, fn;
-
-  args.push(function (resp) {
-    if (fn) fn(resp);
-    else data = resp;
-  });
-
-  asyncFn(...args);
-
-  return function (cb) {
-    if (data) cb(data);
-    else fn = cb;
-  };
 }
 
 function getAlbum(albumNum: number, totalPicNum: number) {

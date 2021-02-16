@@ -83,6 +83,8 @@ function makeThunk(fn) {
     fn.apply(null, args);
   };
 }
+
+// es6 version
 // function makeThunk(fn, ...args) {
 //   return function (cb) {
 //     args.push(cb);
@@ -111,6 +113,7 @@ function makeActiveThunk(asyncFn) {
   };
 }
 
+// es6 version
 // function makeActiveThunk(asyncFn, ...args) {
 //   let data, fn;
 
