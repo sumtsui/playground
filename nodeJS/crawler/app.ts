@@ -6,14 +6,16 @@ const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
 // makeDir(picDir);
 
-// getAlbum(33631, 63);
+// bulkGetDataOnce(22, getData);
+getAlbum(33712, 62);
 
 (async function () {
-  await bulkGetData(300, 50);
+  // await bulkGetDataInChunk(300, 50, getData);
+  // await bulkGetDataInChunk2(22, 4, getData);
 })();
 
 function output(arg) {
-  console.log(arg.toString());
+  console.log('response', arg.toString());
   return Promise.resolve();
 }
 
@@ -23,7 +25,7 @@ function getData(query: number) {
     .catch(err => console.error(err));
 }
 
-async function bulkGetData(total: number, chunk: number) {
+async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: (...args: any[]) => Promise<any>) {
   let works = [];
 
   let i = 1;
@@ -32,16 +34,16 @@ async function bulkGetData(total: number, chunk: number) {
     works.push(i);
 
     if (i % chunk === 0) {
-      // await works
-      //   .map(getData)
-      //   .reduce((chain, pr) => {
-      //     return chain.then(() => pr).then(output);
-      //   }, Promise.resolve())
-      //   .then(() => output('complete chunk ' + i / chunk));
-
-      await Promise
-        .all(works.map(getData))
+      await works
+        .map(asyncFn)
+        .reduce((chain, pr) => {
+          return chain.then(() => pr).then(output);
+        }, Promise.resolve())
         .then(() => output('complete chunk ' + i / chunk));
+
+      // await Promise
+      //   .all(works.map(getData))
+      //   .then(() => output('complete chunk ' + i / chunk));
       works = [];
     }
 
@@ -49,29 +51,65 @@ async function bulkGetData(total: number, chunk: number) {
   }
 }
 
-function getAlbum(albumNum: number, totalPicNum: number) {
-  makeDir(picDir + '/' + albumNum);
+async function bulkGetDataInChunk2(total: number, chunk: number, asyncFn: (...args: any[]) => Promise<any>) {
+  let i = 1;
+  let chain = Promise.resolve();
 
-  let i = 0;
+  while (i <= total) {
 
-  while (i <= totalPicNum) {
-    getPicture(i, albumNum);
+    const task = asyncFn(i);
+    chain = chain.then(() => task);
+
+    if (i % chunk === 0) {
+      await chain
+        .then(() => output('complete chunk ' + i / chunk));
+      chain = Promise.resolve();
+    }
+
     i++;
   }
+}
+
+function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Promise<any>) {
+  let i = 1;
+  let chain = Promise.resolve();
+
+  while (i <= total) {
+
+    const pr = asyncFn(i);
+    chain = chain.then(() => pr);
+
+    i++;
+  }
+
+  chain
+    .then(() => console.log('complete!'));
+}
+
+function getAlbum(albumNum: number, totalPicNum: number) {
+  makeDir(picDir + '/' + albumNum);
+  bulkGetDataOnce(totalPicNum, (picNum) => getPicture(picNum, albumNum));
 }
 
 function getPicture(picNum: number, albumNum: number) {
   const picName = `${picNum}.jpg`;
 
-  request('tjg.hywly.com', `/a/1/${albumNum}/${picNum}.jpg`)
+  return request('tjg.hywly.com', `/a/1/${albumNum}/${picNum}.jpg`)
     .then((response) => {
-      fs.writeFile(picDir + '/' + albumNum + '/' + picName, response, function (err) {
-        if (err) return console.log('fail to save file:', err);
-        console.log(`successfully saved ${picName}`);
+      return new Promise((resolve, reject) => {
+        return fs.writeFile(picDir + '/' + albumNum + '/' + picName, response, function (err) {
+          if (err) {
+            console.log('fail to save file:', err);
+            return reject();
+          }
+          console.log(`successfully saved ${picName}`);
+          return resolve(null);
+        });
       });
     })
     .catch(error => {
       console.log(`fail to download ${picName}:`, error);
+      return Promise.reject();
     });
 }
 
