@@ -13,6 +13,8 @@ let wipRoot = null;
 let currentRoot = null;
 let deletions = null;
 
+window.allworks = [];
+
 function createElement(type, props, ...children) {
   return {
     type,
@@ -36,6 +38,16 @@ function createTextElement(text) {
 }
 
 function render(element, container) {
+  console.log('root fiber', {
+    dom: container,
+    props: {
+      children: [element],
+    },
+    /**
+     * This property is a link to the old fiber, the fiber that we committed to the DOM in the previous commit phase (for reconciliation).
+     */
+    alternate: currentRoot,
+  });
   wipRoot = {
     dom: container,
     props: {
@@ -89,6 +101,7 @@ function workLoop(deadline) {
 requestIdleCallback(workLoop);
 
 function performUnitOfWork(fiber) {
+  window.allworks.push(fiber);
   /**
    * check if the fiber type is a function, and depending on that we go to a different update function.
    */
@@ -113,6 +126,26 @@ function performUnitOfWork(fiber) {
     }
     nextFiber = nextFiber.parent;
   }
+}
+
+/**
+ * We need to initialize some global variables before calling the function component so we can use them inside of the useState function.
+ */
+let wipFiber = null;
+let hookIndex = null; // And we keep track of the current hook index.
+
+/**
+ * Function components are differents in two ways:
+ * 1. the fiber from a function component doesn’t have a DOM node
+ * 2. and the children come from running the function instead of getting them directly from the props
+ */
+function updateFunctionComponent(fiber) {
+  wipFiber = fiber;
+  hookIndex = 0;
+  wipFiber.hooks = []; // We also add a hooks array to the fiber to support calling useState several times in the same component.
+  const children = [fiber.type(fiber.props)];
+  console.log('children got from calling a function component', children);
+  reconcileChildren(fiber, children);
 }
 
 function updateHostComponent(fiber) {
@@ -198,25 +231,6 @@ function reconcileChildren(wipFiber, elements) {
     prevSibling = newFiber;
     index++;
   }
-}
-
-/**
- * We need to initialize some global variables before calling the function component so we can use them inside of the useState function.
- */
-let wipFiber = null;
-let hookIndex = null; // And we keep track of the current hook index.
-
-/**
- * Function components are differents in two ways:
- * 1. the fiber from a function component doesn’t have a DOM node
- * 2. and the children come from running the function instead of getting them directly from the props
- */
-function updateFunctionComponent(fiber) {
-  wipFiber = fiber;
-  hookIndex = 0;
-  wipFiber.hooks = []; // We also add a hooks array to the fiber to support calling useState several times in the same component.
-  const children = [fiber.type(fiber.props)];
-  reconcileChildren(fiber, children);
 }
 
 /* ----------------------------------------------------------------------------------
