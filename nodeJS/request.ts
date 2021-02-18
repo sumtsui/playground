@@ -11,10 +11,9 @@ export function request(hostname: string, path: string): Promise<Buffer> {
 
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
-      console.log(`statusCode: ${res.statusCode}`);
 
       if (res.statusCode >= 400) {
-        reject(res.statusMessage);
+        reject('fail to get ' + hostname + path + ' ' + res.statusMessage);
       }
 
       const data = []; 

@@ -6,17 +6,15 @@ const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
 // makeDir(picDir);
 
-// bulkGetDataOnce(22, getData);
-getAlbum(33712, 62);
+getAlbum(33582, 48);
 
-(async function () {
-  // await bulkGetDataInChunk(300, 50, getData);
-  // await bulkGetDataInChunk2(22, 4, getData);
-})();
+// (async function () {
+// await bulkGetDataInChunk(300, 50, getData);
+// await bulkGetDataInChunk2(22, 4, getData);
+// })();
 
 function output(arg) {
-  console.log('response', arg.toString());
-  return Promise.resolve();
+  console.log('output:', JSON.stringify(arg));
 }
 
 function getData(query: number) {
@@ -77,13 +75,13 @@ function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Promise<any
   while (i <= total) {
 
     const pr = asyncFn(i);
-    chain = chain.then(() => pr);
+    chain = chain.then(() => pr.then(output).catch(output));
 
     i++;
   }
 
   chain
-    .then(() => console.log('complete!'));
+    .then(() => output('complete!'));
 }
 
 function getAlbum(albumNum: number, totalPicNum: number) {
@@ -99,17 +97,15 @@ function getPicture(picNum: number, albumNum: number) {
       return new Promise((resolve, reject) => {
         return fs.writeFile(picDir + '/' + albumNum + '/' + picName, response, function (err) {
           if (err) {
-            console.log('fail to save file:', err);
-            return reject();
+            err.code = 'save file failed: ' + picName; 
+            return reject(err);
           }
-          console.log(`successfully saved ${picName}`);
-          return resolve(null);
+          return resolve(`save file successfully ${picName}`);
         });
       });
     })
-    .catch(error => {
-      console.log(`fail to download ${picName}:`, error);
-      return Promise.reject();
+    .catch(err => {
+      return err;
     });
 }
 
