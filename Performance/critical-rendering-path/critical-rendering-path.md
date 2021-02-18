@@ -53,3 +53,7 @@ defer
 downloads while the HTML file is loading and parsing. won't execute the code **untill** HTML is complete.
 
 https://bitsofco.de/async-vs-defer/
+
+https://stackoverflow.com/questions/32759272/how-to-load-css-asynchronously
+
+https://stackoverflow.com/questions/60774978/how-does-css-blocks-rendering
