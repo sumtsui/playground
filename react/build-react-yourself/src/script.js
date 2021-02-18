@@ -11,7 +11,14 @@ function App(props) {
     <div>
       <h1>Hi {props.name}</h1>
       <button onClick={() => setState((c) => c + 1)}>Click me</button>
-      <button onClick={() => setState2((c) => c - 1)}>Click me</button>
+      <button
+        onClick={() => {
+          setState2((c) => c - 1);
+          setState2((c) => c - 1);
+        }}
+      >
+        Click me
+      </button>
       <p>what is going on?? I am scared!! {state}</p>
       <p>what is going on?? I am scared!! {state2}</p>
     </div>
