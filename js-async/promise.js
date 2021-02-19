@@ -1,6 +1,6 @@
 function getFile(data) {
-  const delay = Math.random() * 5000;
-  // const delay = 3000;
+  // const delay = Math.random() * 5000;
+  const delay = 1000;
 
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -23,20 +23,22 @@ function output(arg) {
       return chain.then(() => pr).then(output);
     }, Promise.resolve())
     .then(() => output('complete'));
-})();
+  // })();
+});
 
 /**
  * manually set a timeout for async function
  */
-(function () {
-  Promise.race([
+(async function () {
+  const result = await Promise.race([
     getFile('myfile'),
     new Promise((_, reject) => {
       setTimeout(() => {
         reject('timeout!!');
-      }, 5000);
+      }, 100);
     }),
-  ]).then(success, error);
+  ]);
+  // .then(success, error);
 
   function success() {
     output('success');
@@ -45,5 +47,7 @@ function output(arg) {
   function error() {
     output('error');
   }
-  // })();
-});
+
+  output('result ' + result);
+})();
+// });

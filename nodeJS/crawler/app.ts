@@ -6,12 +6,34 @@ const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
 // makeDir(picDir);
 
-getAlbum(33582, 48);
+// getAlbum(33582, 48, picDir);
 
-// (async function () {
+(async function () {
 // await bulkGetDataInChunk(300, 50, getData);
 // await bulkGetDataInChunk2(22, 4, getData);
-// })();
+  // await getAllAlbumsByModel([
+  //   '33636',
+  //   '33585',
+  //   '33582',
+  //   '33571',
+  //   '32675',
+  //   '32664',
+  //   '32654',
+  //   '32650',
+  //   '32627',
+  //   '32606',
+  //   '32598',
+  //   '32587',
+  //   '32572',
+  //   '31370',
+  //   '31366',
+  //   '31330',
+  //   '30290',
+  //   '27211',
+  //   '27170',
+  //   '27161'
+  // ], '小九月');
+})();
 
 function output(arg) {
   console.log('output:', JSON.stringify(arg));
@@ -68,8 +90,8 @@ async function bulkGetDataInChunk2(total: number, chunk: number, asyncFn: (...ar
   }
 }
 
-function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Promise<any>) {
-  let i = 1;
+function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Promise<any>, jobName: string) {
+  let i = 0;
   let chain = Promise.resolve();
 
   while (i <= total) {
@@ -80,33 +102,47 @@ function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Promise<any
     i++;
   }
 
-  chain
-    .then(() => output('complete!'));
+  return chain
+    .then(() => output(jobName + ' complete!'));
 }
 
-function getAlbum(albumNum: number, totalPicNum: number) {
-  makeDir(picDir + '/' + albumNum);
-  bulkGetDataOnce(totalPicNum, (picNum) => getPicture(picNum, albumNum));
+async function getAllAlbumsByModel(albums: string[], modelName: string) {
+  const dirPath = picDir + '/' + modelName;
+  makeDir(dirPath);
+  let alTotal = 0;
+
+  for (const num of albums) {
+    await getAlbum(parseInt(num), 100, dirPath).catch(err => console.log('error occurred in getAlbum', num, err));
+    alTotal++;
+  }
+
+  output('get ' + alTotal + ' albums done for ' + modelName);
+  return;
 }
 
-function getPicture(picNum: number, albumNum: number) {
+function getAlbum(albumNum: number, totalPicNum: number, dirPath: string) {
+  const albumPath = dirPath + '/' + albumNum;
+  makeDir(albumPath);
+  return bulkGetDataOnce(totalPicNum, (picNum) => getPicture(picNum, albumNum, albumPath), albumNum.toString());
+}
+
+function getPicture(picNum: number, albumNum: number, albumPath: string) {
   const picName = `${picNum}.jpg`;
 
-  return request('tjg.hywly.com', `/a/1/${albumNum}/${picNum}.jpg`)
-    .then((response) => {
-      return new Promise((resolve, reject) => {
-        return fs.writeFile(picDir + '/' + albumNum + '/' + picName, response, function (err) {
-          if (err) {
-            err.code = 'save file failed: ' + picName; 
-            return reject(err);
-          }
-          return resolve(`save file successfully ${picName}`);
-        });
-      });
-    })
-    .catch(err => {
-      return err;
-    });
+  return Promise.race([
+    request('tjg.hywly.com', `/a/1/${albumNum}/${picNum}.jpg`)
+      .then((response) => {
+        return saveFile(albumPath + '/' + picName, response);
+      })
+      .catch(err => {
+        return err;
+      }),
+    new Promise((_, reject) => {
+      setTimeout(() => {
+        reject('timeout downloading ' + picName);
+      }, 5000);
+    }),
+  ]);
 }
 
 function makeDir(dirname: string) {
@@ -117,4 +153,16 @@ function makeDir(dirname: string) {
   } catch (err) {
     console.error(err);
   }
+}
+
+function saveFile(filePath: string, data) {
+  return new Promise((resolve, reject) => {
+    return fs.writeFile(filePath, data, function (err) {
+      if (err) {
+        err.code = 'save file failed: ' + filePath; 
+        return reject(err);
+      }
+      return resolve(`save file successfully ${filePath}`);
+    });
+  });
 }
