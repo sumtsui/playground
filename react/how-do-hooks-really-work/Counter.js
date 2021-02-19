@@ -1,6 +1,5 @@
 // Example 1
 const MyReact = require('./MyReact');
-const useSplitURL = require('./MyReact');
 
 function Counter() {
   const [count, setCount] = MyReact.useState(0);
@@ -18,6 +17,12 @@ function Counter() {
     noop: () => setCount(count),
     setUrl: (url) => setUrl(url),
   };
+}
+
+function useSplitURL(str) {
+  const [text, setText] = MyReact.useState(str);
+  const masked = text.split('.');
+  return [masked, setText];
 }
 
 let App;

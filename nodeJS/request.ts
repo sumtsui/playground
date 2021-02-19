@@ -1,4 +1,5 @@
 const https = require('https');
+const http = require('http');
 
 export function request(hostname: string, path: string): Promise<Buffer> {
   const options = {
@@ -10,10 +11,9 @@ export function request(hostname: string, path: string): Promise<Buffer> {
 
   return new Promise((resolve, reject) => {
     const req = https.request(options, (res) => {
-      console.log(`statusCode: ${res.statusCode}`);
 
       if (res.statusCode >= 400) {
-        reject(res.statusMessage);
+        reject('fail to get ' + hostname + path + ' ' + res.statusMessage);
       }
 
       const data = []; 
@@ -62,4 +62,38 @@ export function requestWithStream(hostname: string, path: string) {
   });
 
   req.end();
+}
+
+export function requestHttp(hostname: string, path: string, port: number): Promise<Buffer> {
+  const options = {
+    hostname,
+    port,
+    path,
+    method: 'GET',
+  };
+
+  return new Promise((resolve, reject) => {
+    const req = http.request(options, (res) => {
+
+      if (res.statusCode >= 400) {
+        reject(res.statusMessage);
+      }
+
+      const data = []; 
+
+      res.on('data', (chunk) => {
+        data.push(chunk);
+      });
+
+      res.on('end', () => {
+        resolve(Buffer.concat(data));
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    req.end();
+  });
 }
