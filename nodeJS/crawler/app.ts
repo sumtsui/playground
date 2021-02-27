@@ -9,30 +9,15 @@ const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 // getAlbum(33582, 48, picDir);
 
 (async function () {
-// await bulkGetDataInChunk(300, 50, getData);
-// await bulkGetDataInChunk2(22, 4, getData);
-  // await getAllAlbumsByModel([
-  //   '33636',
-  //   '33585',
-  //   '33582',
-  //   '33571',
-  //   '32675',
-  //   '32664',
-  //   '32654',
-  //   '32650',
-  //   '32627',
-  //   '32606',
-  //   '32598',
-  //   '32587',
-  //   '32572',
-  //   '31370',
-  //   '31366',
-  //   '31330',
-  //   '30290',
-  //   '27211',
-  //   '27170',
-  //   '27161'
-  // ], '小九月');
+  await getAllAlbumsByModel([
+    '36253',
+    '33249',
+    '33249',
+    '32317',
+    '13538',
+    '26990'
+  ], '兔子');
+  // await getAlbum(10105, 69, picDir);
 })();
 
 function output(arg) {
@@ -117,7 +102,6 @@ async function getAllAlbumsByModel(albums: string[], modelName: string) {
   }
 
   output('get ' + alTotal + ' albums done for ' + modelName);
-  return;
 }
 
 function getAlbum(albumNum: number, totalPicNum: number, dirPath: string) {
