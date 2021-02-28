@@ -4,21 +4,16 @@ import path from 'path';
 
 const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
-// makeDir(picDir);
-
-// getAlbum(33582, 48, picDir);
-
+makeDir(picDir + '/伊東紗冶子');
 (async function () {
-  await getAllAlbumsByModel([
-    '36253',
-    '33249',
-    '33249',
-    '32317',
-    '13538',
-    '26990'
-  ], '兔子');
-  // await getAlbum(10105, 69, picDir);
+  await getAlbum(21342, 100, picDir + '/伊東紗冶子');
 })();
+
+
+// getAllAlbumsByModel([
+//   '25802',
+//   '26772',
+// ], '小九月');
 
 function output(arg) {
   console.log('output:', JSON.stringify(arg));

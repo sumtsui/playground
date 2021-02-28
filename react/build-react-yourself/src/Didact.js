@@ -38,16 +38,6 @@ function createTextElement(text) {
 }
 
 function render(element, container) {
-  console.log('root fiber', {
-    dom: container,
-    props: {
-      children: [element],
-    },
-    /**
-     * This property is a link to the old fiber, the fiber that we committed to the DOM in the previous commit phase (for reconciliation).
-     */
-    alternate: currentRoot,
-  });
   wipRoot = {
     dom: container,
     props: {

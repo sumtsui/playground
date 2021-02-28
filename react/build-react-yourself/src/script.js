@@ -1,11 +1,13 @@
 /** @jsx Didact.createElement */
-
-import './styles.css';
 import Didact from './Didact';
 
 function App(props) {
   const [state, setState] = Didact.useState(1);
   const [state2, setState2] = Didact.useState(100);
+
+  // Didact.useEffect(() => {
+  //   console.log('state changed', state);
+  // }, [state]);
 
   return (
     <div>
