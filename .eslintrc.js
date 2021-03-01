@@ -18,7 +18,7 @@ module.exports = {
     '@typescript-eslint/indent': ['error', 2],
     // 'newline-per-chained-call': 'error',
     'keyword-spacing': 2,
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 0,
     'quote-props': ['error', 'consistent-as-needed'],
     'semi': 'warn',
     'no-undef': 'error',

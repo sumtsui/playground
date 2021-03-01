@@ -1,4 +1,8 @@
-export async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: (...args: any[]) => Promise<any>) {
+interface IAsyncFn {
+  (...args: any[]): Promise<any>
+}
+
+export async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: IAsyncFn) {
   let i = 1;
   let chain = Promise.resolve();
 
@@ -17,7 +21,7 @@ export async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: 
   }
 }
 
-export function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Promise<any>, jobName: string) {
+export function bulkGetDataOnce(total: number, asyncFn: IAsyncFn, jobName = 'job') {
   let i = 0;
   let chain = Promise.resolve();
 
@@ -30,9 +34,11 @@ export function bulkGetDataOnce(total: number, asyncFn: (...args: any[]) => Prom
   }
 
   return chain
-    .then(() => output(jobName + ' complete!'));
+    .then(() => output(jobName + ' completed!'));
 }
 
 function output(arg) {
-  console.log('output:', JSON.stringify(arg));
+  const result = arg.toString();
+  console.log('output:', result);
+  return result;
 }
