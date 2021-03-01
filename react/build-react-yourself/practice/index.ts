@@ -6,13 +6,12 @@ interface ITree {
     children: ITree[],
   },
   dom?: any,
-  isParent?: boolean
 }
 
 const nodeTree: ITree = {
   type: 'div',
   props: {
-    class: 'foo',
+    className: 'foo',
     children: [
       {
         type: 'h1',
@@ -72,56 +71,49 @@ const rootEl = document.getElementById('root');
 
 // iterate the tree
 function processTree(tree: ITree) {
-  let arr = [tree, {type: '*', props: {children: []}}];
-  let parent = rootEl;
-  let preNode = tree;
+  const arr = [tree];
 
   while (arr.length) {
     const node = arr.shift();
 
     if (!node) break;
 
-    if (node.type === '*') {
-      parent = preNode.dom;
-    } else {
-      // create DOM for each node
-      let dom: any;
-      if (node.type === 'TEXT') {
-        dom = document.createTextNode('');
-      } else {
-        dom = document.createElement(node.type);
-      }
-      Object.keys(node.props)
-        .filter(key => key !== 'children')
-        .forEach((name) => {
-          dom[name] = node.props[name];
-        });
-      node.dom = dom;
-
-      // append DOM to current node's parent
-      parent?.appendChild(node.dom);
-    }
-
-    console.log('node', node);
+    arr.unshift(...node.props.children);
     
-    if (node.props.children.length > 0) {
-      arr = [...arr, ...node.props.children, {type: '*', props: {children: []}}];
-      preNode = node;
-    }
+    createDOMElement(node);
+    
+    console.log('node', node);
   }
 } 
 
 processTree(nodeTree);
 
-// function commitToDOM(tree: ITree) {
-//   if (!tree) return; 
+function createDOMElement(node: ITree) {
+  let dom: any;
+  if (node.type === 'TEXT') {
+    dom = document.createTextNode('');
+  } else {
+    dom = document.createElement(node.type);
+  }
+  Object.keys(node.props)
+    .filter(key => key !== 'children')
+    .forEach((name) => {
+      dom[name] = node.props[name];
+    });
+  node.dom = dom;
+}
 
-//   const parent = rootEl;
+function commitToDOM(tree: ITree, parentDOMNode: HTMLElement) {
+  if (!tree) return;
+  
+  parentDOMNode.appendChild(tree.dom);
 
-//   parent?.appendChild(tree.dom);
-// }
+  tree.props.children.forEach(c => {
+    commitToDOM(c, tree.dom);
+  });
+}
 
-// commitToDOM(nodeTree);
+commitToDOM(nodeTree, rootEl!);
 
 
 
