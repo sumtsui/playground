@@ -35,35 +35,6 @@ export function request(hostname: string, path: string): Promise<Buffer> {
   });
 }
 
-export function requestWithStream(hostname: string, path: string) {
-  const options = {
-    hostname,
-    port: 443,
-    path,
-    method: 'GET',
-  };
-
-  const req = https.request(options, (res) => {
-    console.log(`statusCode: ${res.statusCode}`);
-
-    const data = [];
-
-    res.on('data', (chunk) => {
-      process.stdout.write(chunk);
-    });
-
-    res.on('end', () => {
-      console.log('end');
-    });
-  });
-
-  req.on('error', (error) => {
-    console.log('error', error);
-  });
-
-  req.end();
-}
-
 export function requestHttp(hostname: string, path: string, port: number): Promise<Buffer> {
   const options = {
     hostname,

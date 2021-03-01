@@ -8,7 +8,7 @@ interface ITree {
   dom?: any,
 }
 
-const nodeTree: ITree = {
+const tree: ITree = {
   type: 'div',
   props: {
     className: 'foo',
@@ -62,6 +62,41 @@ const nodeTree: ITree = {
           ]
         }
       },
+      {
+        type: 'p',
+        props: {
+          children: [
+            {
+              type: 'TEXT',
+              props: {
+                nodeValue: 'this is ',
+                children: []
+              }
+            },
+            {
+              type: 'strong',
+              props: {
+                children: [
+                  {
+                    type: 'TEXT',
+                    props: {
+                      nodeValue: 'another',
+                      children: []
+                    }
+                  },
+                ]
+              }
+            },
+            {
+              type: 'TEXT',
+              props: {
+                children: [],
+                nodeValue: ' paragraph.',
+              }
+            },
+          ]
+        }
+      },
     ]   
   }
 };
@@ -78,7 +113,7 @@ function processTree(tree: ITree) {
 
     if (!node) break;
 
-    arr.unshift(...node.props.children);
+    arr.push(...node.props.children);
     
     createDOMElement(node);
     
@@ -86,7 +121,7 @@ function processTree(tree: ITree) {
   }
 } 
 
-processTree(nodeTree);
+processTree(tree);
 
 function createDOMElement(node: ITree) {
   let dom: any;
@@ -113,7 +148,7 @@ function commitToDOM(tree: ITree, parentDOMNode: HTMLElement) {
   });
 }
 
-commitToDOM(nodeTree, rootEl!);
+commitToDOM(tree, rootEl!);
 
 
 

@@ -1,5 +1,5 @@
 "use strict";
-var nodeTree = {
+var tree = {
     type: 'div',
     props: {
         className: 'foo',
@@ -53,6 +53,41 @@ var nodeTree = {
                     ]
                 }
             },
+            {
+                type: 'p',
+                props: {
+                    children: [
+                        {
+                            type: 'TEXT',
+                            props: {
+                                nodeValue: 'this is ',
+                                children: []
+                            }
+                        },
+                        {
+                            type: 'strong',
+                            props: {
+                                children: [
+                                    {
+                                        type: 'TEXT',
+                                        props: {
+                                            nodeValue: 'another',
+                                            children: []
+                                        }
+                                    },
+                                ]
+                            }
+                        },
+                        {
+                            type: 'TEXT',
+                            props: {
+                                children: [],
+                                nodeValue: ' paragraph.',
+                            }
+                        },
+                    ]
+                }
+            },
         ]
     }
 };
@@ -65,12 +100,12 @@ function processTree(tree) {
         var node = arr.shift();
         if (!node)
             break;
-        arr.unshift.apply(arr, node.props.children);
+        arr.push.apply(arr, node.props.children);
         createDOMElement(node);
         console.log('node', node);
     }
 }
-processTree(nodeTree);
+processTree(tree);
 function createDOMElement(node) {
     var dom;
     if (node.type === 'TEXT') {
@@ -94,4 +129,4 @@ function commitToDOM(tree, parentDOMNode) {
         commitToDOM(c, tree.dom);
     });
 }
-commitToDOM(nodeTree, rootEl);
+commitToDOM(tree, rootEl);
