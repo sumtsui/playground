@@ -4,6 +4,10 @@ const obj = {
   a: {
     a0: 10,
     a1: 20,
+    a3: {
+      d0: 3,
+      d1: 12,
+    },
   },
   b: {
     b0: 10,
@@ -29,8 +33,24 @@ function processObjectDeep(object) {
 }
 
 // const processed1 = processObjectShallow(obj);
-const processed2 = processObjectDeep(obj);
+// const processed2 = processObjectDeep(obj);
 
-console.log('unprocessed', JSON.stringify(obj));
-// console.log('processed1', JSON.stringify(processed1));
-console.log('processed2', JSON.stringify(processed2));
+// console.log('unprocessed', JSON.stringify(obj));
+// // console.log('processed1', JSON.stringify(processed1));
+// console.log('processed2', JSON.stringify(processed2));
+
+const result = {};
+
+function deepClone(node) {
+  if (typeof node === 'object') {
+    const temp = {};
+    console.log('node', node);
+    Object.keys(node).forEach((k) => {
+      deepClone(node[k]);
+    });
+  } else {
+    return node;
+  }
+}
+
+deepClone(obj);
