@@ -1,21 +1,5 @@
 const _ = require('lodash');
 
-const obj = {
-  a: {
-    a0: 10,
-    a1: 20,
-    a3: {
-      d0: 3,
-      d1: 12,
-    },
-  },
-  b: {
-    b0: 10,
-    b1: 20,
-  },
-  c: 123,
-};
-
 function processObjectShallow(object) {
   const insideObj = { ...object };
 
@@ -39,18 +23,37 @@ function processObjectDeep(object) {
 // // console.log('processed1', JSON.stringify(processed1));
 // console.log('processed2', JSON.stringify(processed2));
 
-const result = {};
+const obj = {
+  a: {
+    a0: 10,
+    a1: 20,
+    a3: {
+      d0: 3,
+      d1: 12,
+    },
+  },
+  b: {
+    b0: 10,
+    b1: 20,
+    b2: [{ e0: 23 }, 1000],
+  },
+  c: 123,
+};
 
+// https://javascript.plainenglish.io/write-a-better-deep-clone-function-in-javascript-d0e798e5f550
 function deepClone(node) {
   if (typeof node === 'object') {
-    const temp = {};
-    console.log('node', node);
+    const temp = Array.isArray(node) ? [] : {};
+
     Object.keys(node).forEach((k) => {
-      deepClone(node[k]);
+      temp[k] = deepClone(node[k]);
     });
+    return temp;
   } else {
     return node;
   }
 }
 
-deepClone(obj);
+const result = deepClone(obj);
+
+console.log('result', JSON.stringify(result, null, 4));

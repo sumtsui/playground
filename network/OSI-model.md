@@ -22,5 +22,4 @@ Request for comment (RFC), to discuss protocals.
 | Data Link   | Switch / Bridge                | Frames       |
 | Physical    | Hub                            | Bits         |
 
-I am writing BIG characters, so Big, so Big, Got To Get Used to This Small Shift Button.
 

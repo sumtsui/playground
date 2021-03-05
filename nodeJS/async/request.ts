@@ -35,7 +35,7 @@ export function request(hostname: string, path: string): Promise<Buffer> {
   });
 }
 
-export function requestHttp(hostname: string, path: string, port: number): Promise<Buffer> {
+export function requestHttp(hostname: string, path: string, port: number): Promise<string> {
   const options = {
     hostname,
     port,
@@ -57,7 +57,7 @@ export function requestHttp(hostname: string, path: string, port: number): Promi
       });
 
       res.on('end', () => {
-        resolve(Buffer.concat(data));
+        resolve(Buffer.concat(data).toString());
       });
     });
 
