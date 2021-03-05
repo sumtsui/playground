@@ -21,7 +21,10 @@ function getDataFail(param) {
     }),
   ]).catch((err) => {
     console.log('err Promise.all', err);
+    throw err;
   });
 
   console.log('result', result);
 })();
+
+console.log('outside iife');
