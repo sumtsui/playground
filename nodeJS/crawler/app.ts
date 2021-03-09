@@ -5,15 +5,14 @@ import path from 'path';
 
 const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
-makeDir(picDir + '/伊東紗冶子');
-(async function () {
-  await getAlbum(21342, 100, picDir + '/伊東紗冶子');
-})();
+// makeDir(picDir + '/杂/姜贞语');
+// getAlbum(38492, 59, picDir + '/杂/姜贞语');
 
-// getAllAlbumsByModel([
-//   '25802',
-//   '26772',
-// ], '小九月');
+getAllAlbumsByModel([
+  '40726',
+  '40725',
+  '40710',
+], '丝慕');
 
 async function getAllAlbumsByModel(albums: string[], modelName: string) {
   const dirPath = picDir + '/' + modelName;
