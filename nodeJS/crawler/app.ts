@@ -5,14 +5,14 @@ import path from 'path';
 
 const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
-// makeDir(picDir + '/杂/姜贞语');
-// getAlbum(38492, 59, picDir + '/杂/姜贞语');
+makeDir(picDir + '/杂/思话');
+getAlbum(41061, 46, picDir + '/杂/思话');
 
-getAllAlbumsByModel([
-  '40726',
-  '40725',
-  '40710',
-], '丝慕');
+// getAllAlbumsByModel([
+//   '40726',
+//   '40725',
+//   '40710',
+// ], '丝慕');
 
 async function getAllAlbumsByModel(albums: string[], modelName: string) {
   const dirPath = picDir + '/' + modelName;
