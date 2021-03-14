@@ -5,8 +5,8 @@ import path from 'path';
 
 const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
 
-makeDir(picDir + '/杂/思话');
-getAlbum(41061, 46, picDir + '/杂/思话');
+makeDir(picDir + '/袜涩');
+getAlbum(41120, 70, picDir + '/袜涩');
 
 // getAllAlbumsByModel([
 //   '40726',
