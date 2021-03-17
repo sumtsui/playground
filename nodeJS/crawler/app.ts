@@ -1,12 +1,26 @@
 import { request } from '../async/request';
-import { saveFile, makeDir } from '../async/saveFile';
+import { saveFile, makeDir, keepMakingDir } from '../async/saveFile';
 import { bulkGetDataOnce } from '../async/asyncBulk';
 import path from 'path';
 
-const picDir = path.resolve(__dirname, '/Users/sum/Pictures');
+const MAIN_DIR = path.resolve(__dirname, '/Users/sum/Pictures');
 
-makeDir(picDir + '/袜涩');
-getAlbum(41120, 70, picDir + '/袜涩');
+const [, , ...args] = process.argv;
+
+console.log('args', args);
+
+const picDir = MAIN_DIR + '/' + args[0];
+const albumName = parseInt(args[1]);
+const picTotal = parseInt(args[2]) || 1000;
+
+keepMakingDir(picDir);
+getAlbum(albumName, picTotal, picDir);
+
+/**
+ * arg1: filepath
+ * arg2: album name
+ * arg3: pic total
+ */
 
 // getAllAlbumsByModel([
 //   '40726',
@@ -15,12 +29,13 @@ getAlbum(41120, 70, picDir + '/袜涩');
 // ], '丝慕');
 
 async function getAllAlbumsByModel(albums: string[], modelName: string) {
-  const dirPath = picDir + '/' + modelName;
+  const dirPath = MAIN_DIR + '/' + modelName;
   makeDir(dirPath);
   let alTotal = 0;
 
   for (const num of albums) {
-    await getAlbum(parseInt(num), 100, dirPath).catch(err => console.log('error occurred in getAlbum', num, err));
+    await getAlbum(parseInt(num), 100, dirPath)
+      .catch(err => console.log('error occurred in getAlbum', num, err));
     alTotal++;
   }
 
@@ -28,7 +43,7 @@ async function getAllAlbumsByModel(albums: string[], modelName: string) {
 }
 
 function getAlbum(albumNum: number, totalPicNum: number, dirPath: string) {
-  const albumPath = dirPath + '/' + albumNum;
+  const albumPath = dirPath + albumNum;
   makeDir(albumPath);
   return bulkGetDataOnce(totalPicNum, (picNum) => getPicture(picNum, albumNum, albumPath), albumNum.toString());
 }
