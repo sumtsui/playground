@@ -4,7 +4,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
   ],
   env: {
     node: true,
@@ -15,8 +14,8 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   root: true,
   rules: {
+    'newline-per-chained-call': [1, {ignoreChainWithDepth: 1}],
     '@typescript-eslint/indent': ['error', 2],
-    // 'newline-per-chained-call': 'error',
     'keyword-spacing': 2,
     'no-unused-vars': 0,
     'quote-props': ['error', 'consistent-as-needed'],
