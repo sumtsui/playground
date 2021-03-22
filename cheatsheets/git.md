@@ -8,3 +8,4 @@
 | git config --global credential.helper osxkeychain                    | let git reprompt password                   |                                                                                                                          |
 | git log <commit hash>..HEAD                                          | list commits after a commit, not inclusive  |                                                                                                                          |
 | git log <commit hash>^..HEAD                                         | list commits after a commit, inclusive      |                                                                                                                          |
+| git log --follow -- <filename>                                       | list commits on a specific file             | https://stackoverflow.com/questions/3701404/how-can-i-list-all-commits-that-changed-a-specific-file?rq=1                 |
