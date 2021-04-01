@@ -1,30 +1,55 @@
-function getData(param, isSuccessful = true) {
-  return new Promise((resolve, reject) => {
-    const delay = Math.random() * 2000;
+function getFile(data) {
+  // const delay = Math.random() * 5000;
+  const delay = 1000;
+
+  return new Promise((resolve) => {
     setTimeout(() => {
-      if (isSuccessful) resolve(param);
-      else reject(param);
+      resolve(data);
     }, delay);
   });
 }
 
-function getDataFail(param) {
-  return getData(param, false);
+function output(arg) {
+  console.log(arg);
 }
 
-(async () => {
-  const result = await Promise.all([
-    getData(1),
-    getDataFail(2).catch((err) => {
-      console.log('err getDataFail', err);
-      throw err;
+/**
+ * helper for chaining promises
+ */
+(function () {
+  ['file1', 'file2', 'file3']
+    .map(getFile)
+    .reduce((chain, pr) => {
+      return chain.then(() => pr)
+        .then(output);
+    }, Promise.resolve())
+    .then(() => output('complete'));
+  // })();
+});
+
+/**
+ * manually set a timeout for async function
+ */
+(async function () {
+  const result = await Promise.race([
+    getFile('myfile'),
+    new Promise((_, reject) => {
+      setTimeout(() => {
+        reject('timeout!!');
+      }, 100);
     }),
-  ]).catch((err) => {
-    console.log('err Promise.all', err);
-    throw err;
-  });
+  ]);
+  // .then(success, error);
 
-  console.log('result', result);
+  function success() {
+    output('success');
+  }
+
+  function error() {
+    output('error');
+  }
+
+  output('result ' + result);
 })();
+// });
 
-console.log('outside iife');

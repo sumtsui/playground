@@ -20,7 +20,8 @@ function output(arg) {
   ['file1', 'file2', 'file3']
     .map(getFile)
     .reduce((chain, pr) => {
-      return chain.then(() => pr).then(output);
+      return chain.then(() => pr)
+        .then(output);
     }, Promise.resolve())
     .then(() => output('complete'));
   // })();
@@ -51,3 +52,4 @@ function output(arg) {
   output('result ' + result);
 })();
 // });
+
