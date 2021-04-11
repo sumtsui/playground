@@ -10,4 +10,6 @@
 | git log <commit hash>^..HEAD                                 | list commits after a commit, inclusive      |                                                              |
 | git log --follow -- <filename>                               | list commits on a specific file             | https://stackoverflow.com/questions/3701404/how-can-i-list-all-commits-that-changed-a-specific-file?rq=1 |
 | git branch -r                                                | list all remote branches                    |                                                              |
-|                                                              | get all remote branches to local            | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
+| git checkout --track <branchname>                            | get remote branches to local                | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
+|                                                              |                                             |                                                              |
+

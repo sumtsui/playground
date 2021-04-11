@@ -12,7 +12,7 @@ https://github.com/sumtsui/blockchain-in-js
 
     A hash function is any function that can be used to map data of arbitrary size to fixed-size values. The hash value is a summary of the original data. The values returned by a hash function are called hash values, hash codes, digests, or simply hashes.
 
-    A hash function algorithm is designed to be a one-way function, infeasible to invert. However, in recent years several hashing algorithms have been compromised. This happened to MD5. 
+    A hash function algorithm is designed to be a one-way function, infeasible to invert. However, in recent years several hashing algorithms have been compromised. This happened to MD5.
 
     how it works?
 
@@ -30,13 +30,14 @@ https://github.com/sumtsui/blockchain-in-js
 
     Secure Hash Algorithm (SHA). SHA-1 is broken too. SHA-2 is good tho. Its family has six hash functions with digests: SHA-224, SHA-256 or 512 bits: SHA-224, **SHA-256**, SHA-384, SHA-512, SHA-512/224, SHA-512/256.
 
-    how do you feel about this?
-
-    still wobbling?
-
-    or is it better?
-
-    hahahah
-
     nonce
+
+    A nonce is an abbreviation for "number only used once," which is a number added to a hashed—or encrypted—block in a blockchain that, when rehashed, meets the difficulty level restrictions. The nonce is the number that blockchain miners are solving for.
+
+  public-key encryption
+
+
+
+  peer-to-peer network
+
 

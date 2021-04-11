@@ -43,7 +43,7 @@ async function getAllAlbumsByModel(albums: string[], modelName: string) {
 }
 
 function getAlbum(albumNum: number, totalPicNum: number, dirPath: string) {
-  const albumPath = dirPath + albumNum;
+  const albumPath = dirPath + '/' + albumNum;
   makeDir(albumPath);
   return bulkGetDataOnce(totalPicNum, (picNum) => getPicture(picNum, albumNum, albumPath), albumNum.toString());
 }
