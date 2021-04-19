@@ -12,3 +12,6 @@
 | git branch -r                                                | list all remote branches                    |                                                              |
 |                                                              | get all remote branches to local            | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
 | git config --global credential.helper osxkeychain            | let git prompt password again            | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
+| git checkout --track <branchname>                            | get remote branches to local                | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
+|                                                              |                                             |                                                              |
+
