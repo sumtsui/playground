@@ -120,7 +120,9 @@ const CancelPolicyNote: FC<IProps> = ({ htid }: IProps) => {
 };
 ```
 
-Now we will ensure react won't render the actual content of the component when the i18n file is not ready. Of course, we can return a loader instead of `null.`![i18n-5](/Users/sum_xu/Desktop/playground/blogs/i18n-5.png)
+Now we will ensure react won't render the actual content of the component when the i18n file is not ready. Of course, we can return a loader instead of `null.`
+
+![i18n-5](/Users/sum_xu/Desktop/playground/blogs/i18n-5.png)
 
 ### 
 

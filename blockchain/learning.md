@@ -38,5 +38,7 @@ https://github.com/sumtsui/blockchain-in-js
 
     hahahah
 
+    is this ok? no ... this is worst
+
     nonce
 
