@@ -18,9 +18,7 @@ function ParentComponent() {
 }
 ```
 
-This is convenient but comes with a caveat. All i18n files for this piece of UI live in the component. If the user's locale is en_US, the bundle will still contain all other i18n files for zh_CN, fr_FR etc, resulting in unnecessarily large bundle size.
-
-Take a look on epc-reservation-deposit-web's bundle analysis, **All i18n files are bundled together. This means even the client only needs to display one language, it will force the user to download all 34 files:** 
+This is convenient but comes with a caveat. All i18n files for this piece of UI live in the component. Take a look on epc-reservation-deposit-web's bundle analysis, **All i18n files are bundled together. This means even the client only needs to display one language, it will force the user to download all 34 files:** 
 
 ![2021-04-01 at 5.30 PM](i18n-before-op.png)
 
@@ -101,13 +99,15 @@ Look at `epc-reservation-deposit-web` 's bundle analysis again, all i18n files a
 
 ![2021-04-01 at 5.57 PM](i18n-4.png)
 
-How awesome is this! Webpack splits the i18n files into their own chunk. Now if the consumer uses our shared component, the initail bundle will not contain any i18n files. And the one i18n file that actually needed will be downloaded at run time. 
+How awesome is this! Webpack splits the i18n files into their own chunk. Now if the consumer uses our shared component, the initail bundle will not contain any i18n files. And the one i18n file that actually needed will be downloaded at run time based on the user's locale. 
 
 ## `import()`is an async function
 
 If we load the page again, it will look like this, the i18n key for the word "Loading" is displayed instead of the actual text:
 
 ![i18n-lockey](i18n-lockey.png) 
+
+This is because i18n file is downloading the same time React is rendering. If the file is not downloaded before loading state is finished, even the actual content will be i18n key only.
 
 To avoid this, we can wrap our `getMessageSource` function with a simple custom react hook:
 
