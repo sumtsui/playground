@@ -2,7 +2,7 @@
 
 On the partner central reservation deposits page, there is a section displaying the default cancellation policy, which is a shared UI component published on NPM. In this case, the project `epc-reservation-deposit-web` is the consumer of the shared UI component `epc-cancelpolicy-ui` . 
 
-![2021-04-21 at 10.36 AM](/Users/sum_xu/Desktop/playground/blogs/i18n-cp-section.png)
+![2021-04-21 at 10.36 AM](i18n-cp-section.png)
 
 In `epc-reservation-deposit-web` we use the component like so,
 
@@ -22,7 +22,7 @@ This is convenient but comes with a caveat. All i18n files for this piece of UI 
 
 Take a look on epc-reservation-deposit-web's bundle analysis, **All i18n files are bundled together. This means even the client only needs to display one language, it will force the user to download all 34 files:** 
 
-![2021-04-01 at 5.30 PM](/Users/sum_xu/Desktop/playground/blogs/i18n-before-op.png)
+![2021-04-01 at 5.30 PM](i18n-before-op.png)
 
 In a typical server-client app, the server knows the user's locale when the request comes in and can pick the i18n file in use, generate a script to write the strings to the `Window` object,  where the client can read from.
 
@@ -99,7 +99,7 @@ const CancelPolicyNote: FC<IProps> = ({ htid }: IProps) => {
 
 Look at `epc-reservation-deposit-web` 's bundle analysis again, all i18n files are in their separate chunks: 
 
-![2021-04-01 at 5.57 PM](/Users/sum_xu/Desktop/playground/blogs/i18n-4.png)
+![2021-04-01 at 5.57 PM](i18n-4.png)
 
 How awesome is this! Webpack splits the i18n files into their own chunk. Now if the consumer uses our shared component, the initail bundle will not contain any i18n files. And the one i18n file that actually needed will be downloaded at run time. 
 
@@ -107,7 +107,7 @@ How awesome is this! Webpack splits the i18n files into their own chunk. Now if 
 
 If we load the page again, it will look like this, the i18n key for the word "Loading" is displayed instead of the actual text:
 
-![i18n-lockey](/Users/sum_xu/Desktop/playground/blogs/i18n-lockey.png) 
+![i18n-lockey](i18n-lockey.png) 
 
 To avoid this, we can wrap our `getMessageSource` function with a simple custom react hook:
 
@@ -141,7 +141,7 @@ const CancelPolicyNote: FC<IProps> = ({ htid }: IProps) => {
 
 Now we will ensure React won't render the actual content of the component before the i18n file is ready. 
 
-![i18n-5](/Users/sum_xu/Desktop/playground/blogs/i18n-5.png)
+![i18n-5](i18n-5.png)
 
 ## That is all
 
