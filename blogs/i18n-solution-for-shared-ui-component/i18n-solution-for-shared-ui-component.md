@@ -99,7 +99,7 @@ Look at `epc-reservation-deposit-web` 's bundle analysis again, all i18n files a
 
 ![2021-04-01 at 5.57 PM](i18n-4.png)
 
-How awesome is this! Webpack splits the i18n files into their own chunk. Now if the consumer uses our shared component, the initail bundle will not contain any i18n files. And the one i18n file that actually needed will be downloaded at run time based on the user's locale. 
+How awesome is this! Webpack splits the i18n files into their own chunk. Now if the consumer uses our shared component, the initial bundle will not contain any i18n files. And the one i18n file that actually needed will be downloaded at run time based on the user's locale. 
 
 ## `import()`is an async function
 
@@ -111,7 +111,7 @@ This is because i18n file is downloading the same time React is rendering. If th
 
 To avoid this, we can wrap our `getMessageSource` function with a simple custom react hook:
 
-```react
+```tsx
 const useMessageSource = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -125,7 +125,7 @@ const useMessageSource = () => {
 
 And use the hook in our component like so:
 
-```react
+```tsx
 const CancelPolicyNote: FC<IProps> = ({ htid }: IProps) => {
   const isMessageSourceLoaded = useMessageSource();
 
