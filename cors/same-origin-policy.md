@@ -4,7 +4,7 @@ In [computing](https://en.wikipedia.org/wiki/Computing), the **same-origin polic
 
 This mechanism bears a particular significance for modern web applications that extensively depend on [HTTP cookies](https://en.wikipedia.org/wiki/HTTP_cookie)[[1\]](https://en.wikipedia.org/wiki/Same-origin_policy#cite_note-httpcookierfc-1) to maintain authenticated user sessions, as servers act based on the HTTP cookie information to reveal sensitive information or take state-changing actions. A strict separation between content provided by unrelated sites must be maintained on the client-side to prevent the loss of data confidentiality or integrity.
 
-It is very important to remember that the same-origin policy applies only to scripts. This means that resources such as images, CSS, and dynamically-loaded scripts can be accessed across origins via the corresponding HTML tags[[2\]](https://en.wikipedia.org/wiki/Same-origin_policy#cite_note-2) (with fonts being a notable exception[[3\]](https://en.wikipedia.org/wiki/Same-origin_policy#cite_note-3)). **Attacks take advantage of the fact that the same origin policy does not apply to HTML tags.**
+**It is very important to remember that the same-origin policy applies only to scripts.** This means that resources such as images, CSS, and dynamically-loaded scripts can be accessed across origins via the corresponding HTML tags[[2\]](https://en.wikipedia.org/wiki/Same-origin_policy#cite_note-2) (with fonts being a notable exception[[3\]](https://en.wikipedia.org/wiki/Same-origin_policy#cite_note-3)). **Attacks take advantage of the fact that the same origin policy does not apply to HTML tags.**
 
 https://en.wikipedia.org/wiki/Same-origin_policy
 
