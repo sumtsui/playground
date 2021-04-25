@@ -1,2 +1,4 @@
 - CORS
+  - what files in what condition will be restricted 
 - script tag type, module, nomodule, text/javascript ...
+  - need to try module in browser
