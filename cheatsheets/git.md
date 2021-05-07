@@ -5,7 +5,6 @@
 | git log --pretty=tformat:"%h %ad \| %s%d [%an]" --graph --date=short | Git log with nicer format                   |                                                              |
 | git diff mybranch master -- myfile.js                        | diff file btw branches                      |                                                              |
 | git diff HEAD~5 HEAD -- myfile.js                            | diff file btw latest commit and old commits | https://stackoverflow.com/questions/3338126/how-do-i-diff-the-same-file-between-two-different-commits-on-the-same-branch |
-| git config --global credential.helper osxkeychain            | let git reprompt password                   |                                                              |
 | git log <commit hash>..HEAD                                  | list commits after a commit, not inclusive  |                                                              |
 | git log <commit hash>^..HEAD                                 | list commits after a commit, inclusive      |                                                              |
 | git log --follow -- <filename>                               | list commits on a specific file             | https://stackoverflow.com/questions/3701404/how-can-i-list-all-commits-that-changed-a-specific-file?rq=1 |
