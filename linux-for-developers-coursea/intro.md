@@ -13,3 +13,10 @@ The Linux Foundation: OSDL merged with the Free Standards Group in 2007 to form 
 Linux has its roots in UNIX. As such, some of its most basic components are completely rooted in UNIX: inode-based filesystem, multi-process scheduling, process creation and destruction, accessing hardware though device nodes, etc.
 
 The 3 major Linux distribution families are: Red Hat, Debian, and SUSE.
+
+## Bash
+
+```bash
+# see all the shells available in the system
+cat /etc/shells
+```
