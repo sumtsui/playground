@@ -1,6 +1,6 @@
 const http = require('http');
 
-function requestHttp(hostname, path, port) {
+function requestWithPromise(hostname, path, port) {
   const options = {
     hostname,
     port,
@@ -33,4 +33,4 @@ function requestHttp(hostname, path, port) {
   });
 }
 
-module.exports = requestHttp;
+module.exports = requestWithPromise;

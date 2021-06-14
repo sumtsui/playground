@@ -1,4 +1,4 @@
-# Having fine-grained control over asynchrouous tasks in JavaScript
+# Having fine-grained control over concurrent asynchrouous tasks in JavaScript
 
 Let's say we want to make 100 requests to a server to download 100 pictures. For this simple job, what we want to achieve are:
 

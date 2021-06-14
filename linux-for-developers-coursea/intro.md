@@ -14,9 +14,24 @@ Linux has its roots in UNIX. As such, some of its most basic components are comp
 
 The 3 major Linux distribution families are: Red Hat, Debian, and SUSE.
 
-## Bash
+## Shells
+
+A shell is a command line interpreter which can constitute the user interface for terminal windows. It can also be used as a mechanism to run scripts, even in non-interactive sessions without a terminal window, as if the commands were being typed in.
+
+### Bash
 
 ```bash
 # see all the shells available in the system
 cat /etc/shells
+```
+
+### Expression
+
+```bash
+# set variable x
+x=10
+
+echo $(($x - 3)) # 7
+
+echo $(expr $x - 3) # 7
 ```
