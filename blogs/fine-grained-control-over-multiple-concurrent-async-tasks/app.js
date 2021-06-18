@@ -1,22 +1,54 @@
 const request = require('./request');
 
-function getData(query) {
-  return request('localhost', `/picture?query=${query}`, 2001);
+function getData(query, makeItFail) {
+  const path = makeItFail ? '/not-exist' : `/picture?query=${query}`;
+
+  return request('localhost', path, 2001);
 }
 
-function output(arg) {
-  console.log('output:', arg.toString(), '\n');
+function getDataFail(query) {
+  return getData(query, true);
 }
 
-const total = 100;
-let i = 1;
-let chain = Promise.resolve();
-
-while (i <= total) {
-  const pr = getData(i);
-  chain = chain.then(() => pr.then(output).catch(output));
-
-  i++;
+function output(label) {
+  return (val) => {
+    console.log(label || 'output', ':', val, '\n');
+    return val;
+  };
 }
 
-chain.then(() => output('all tasks completed!'));
+// const total = 100;
+// let i = 1;
+// let chain = Promise.resolve();
+
+// while (i <= total) {
+//   const pr = getData(i)
+//     .then(output);
+//   chain = chain.then(() => pr.then(output)
+//     .catch(output));
+
+//   i++;
+// }
+
+// chain.then(() => output('all tasks completed!'));
+
+function usePromiseAll() {
+  const total = 100;
+  let i = 1;
+  const promises = [];
+
+  while (i <= total) {
+    const pr = i % 10 === 0 ? getDataFail(i) : getData(i);
+
+    promises.push(pr.then(output('request ' + i))
+      .catch(output('request ' + i)));
+
+    i++;
+  }
+
+  Promise.all(promises)
+    .then(output())
+    .catch(output());
+}
+
+usePromiseAll();

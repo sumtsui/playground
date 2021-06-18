@@ -21,7 +21,8 @@ function requestWithPromise(hostname, path, port) {
       });
 
       res.on('end', () => {
-        resolve(Buffer.concat(data).toString());
+        resolve(Buffer.concat(data)
+          .toString());
       });
     });
 

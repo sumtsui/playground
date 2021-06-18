@@ -15,8 +15,10 @@ const server = http.createServer((req, res) => {
       res.writeHead(200);
       setTimeout(() => res.end(JSON.stringify(response)), delay);
     } else {
+      const delay = Math.random() * 2000;
+
       res.writeHead(400);
-      res.end('wasup');
+      setTimeout(() => res.end(), delay);
     }
   }
 });
