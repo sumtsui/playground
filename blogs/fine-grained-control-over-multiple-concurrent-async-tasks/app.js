@@ -17,20 +17,23 @@ function output(label) {
   };
 }
 
-// const total = 100;
-// let i = 1;
-// let chain = Promise.resolve();
+function usePromiseChain() {
+  const total = 100;
+  let i = 1;
+  let chain = Promise.resolve();
 
-// while (i <= total) {
-//   const pr = getData(i)
-//     .then(output);
-//   chain = chain.then(() => pr.then(output)
-//     .catch(output));
+  while (i <= total) {
+    const pr = i % 10 === 0 ? getDataFail(i) : getData(i);
+    // const pr = getData(i);
 
-//   i++;
-// }
+    chain = chain.then(pr.then(output())
+      .catch(output()));
 
-// chain.then(() => output('all tasks completed!'));
+    i++;
+  }
+
+  return Promise.resolve('finished!');
+}
 
 function usePromiseAll() {
   const total = 100;
@@ -40,15 +43,23 @@ function usePromiseAll() {
   while (i <= total) {
     const pr = i % 10 === 0 ? getDataFail(i) : getData(i);
 
-    promises.push(pr.then(output('request ' + i))
-      .catch(output('request ' + i)));
+    promises.push(pr.then(output(`request ${i}`))
+      .catch(output(`request ${i}`)));
 
     i++;
   }
 
   Promise.all(promises)
-    .then(output())
+    .then(output('all tasks completed!'))
     .catch(output());
 }
 
-usePromiseAll();
+// usePromiseAll();
+// usePromiseChain();
+
+(async () => {
+  usePromiseChain()
+    .then(output('finally'));
+
+  output('all tasks completed!')();
+})();

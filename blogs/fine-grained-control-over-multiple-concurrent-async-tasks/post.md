@@ -1,8 +1,8 @@
-# Having fine-grained control over concurrent asynchrouous tasks in JavaScript
+# How to do bulk asynchrouous tasks in JavaScript
 
 Let's say we want to make 100 requests to a server to download 100 pictures. For this simple job, we want to achieve:
 
-- These 100 requests will be made simultaneously (non-blocking, one doesn't have to wait for the previous one).
+- These 100 requests will be made simultaneously (non-blocking, one doesn't have to wait for the previous one to finish).
 - We want to know if the request was successful or failed, so we can log the failed request or try again with them.
 - We should know excatly when all requests finished.
 
@@ -74,7 +74,7 @@ Let's artifically fail every 10 request and see what happen:
 output: Bad Request
 ```
 
-No successful request is logged out and only the first failed request's response was logged at the `catch` call. This is certainly not what we want. So let's modify the code. This time we will chain a `then` and `catch` on each promise and log there instead of after the `Promise.all` call. 
+No successful request is logged out and only the first failed request's response was logged at the `catch` call. This is how `Promise.all` behaves and certainly not what we want. So let's modify the code. This time we will chain a `then` and `catch` on each promise, so we are handling the failed case within each promise.
 
 I also modified the `output` function, letting it return `value` at the end so `Promise.all` can still have something to log. Also I changed the function to a curry to avoid stale closure which will forbid us getting the correct value of `i`. Don't worry about it if you are not familiar with stale closure, it won't prevent you from understanding this article. 
 
@@ -95,14 +95,14 @@ const total = 100;
   while (i <= total) {
     const pr = i % 10 === 0 ? getDataFail(i) : getData(i);
 
-    promises.push(pr.then(res => output(res, `request ${i}`))
-      .catch(res => output(res, `request ${i}`)));
+    promises.push(pr.then(output(`request ${i}`))
+      .catch(output(`request ${i}`)));
 
     i++;
   }
 
   Promise.all(promises)
-    .then(output())
+    .then(output('all tasks completed!'))
     .catch(output());
 ```
 
@@ -119,6 +119,43 @@ request 60 : Bad Request
 request 72 : {"delay":784.1644175172879,"data":"pic72"} 
 request 21 : {"delay":818.9229104903708,"data":"pic21"} 
 ......
+
+all tasks completed! : [
+  ......
+  '{"delay":951.2107054696633,"data":"pic7"}',
+  '{"delay":958.1445429098596,"data":"pic8"}',
+  '{"delay":1523.4516843247916,"data":"pic9"}',
+  'Bad Request',
+  ......
+  '{"delay":429.68207874712226,"data":"pic98"}',
+  '{"delay":271.60417455687957,"data":"pic99"}',
+  'Bad Request'
+]
 ```
 
-Now we can know exactly each request is succeeded or failed. Even thought they logged in the order of which request arriving first. 
+Now we can know exactly each request is succeeded or failed. One thing worth pointing out is the log of each task happened at the time that request was returned thus they were not in order, whereas the last log from `Promise.all` listed all response in order. 
+
+There is another way to achieve these without using `Promise.all`:
+
+```js
+const total = 100;
+let i = 1;
+let chain = Promise.resolve();
+
+while (i <= total) {
+  const pr = i % 10 === 0 ? getDataFail(i) : getData(i);
+
+  chain = chain.then(pr.then(output())
+    .catch(output()));
+
+  i++;
+}
+```
+
+What the code does is making a promise chain. Starting from a `Promise.resolve()` and keep chaining new promises one to the other. 
+
+However, with this way, even you add a `chain.then(output('all tasks completed!'));` below the `while` loop. It will still execuate before other async tasks finish. If you want to log when all tasks finish, you can wrap the code in an async function and await the result: 
+
+```js
+
+```
