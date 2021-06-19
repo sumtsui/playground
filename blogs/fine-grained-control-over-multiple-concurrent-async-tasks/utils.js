@@ -12,7 +12,8 @@ function getData(query, makeItFail) {
 }
 
 function getDataFail(query) {
-  return getData(query, true);
+  return getData(query, true)
+    .catch(err => err); // do this to prevent "PromiseRejectionHandledWarning: Promise rejection was handled asynchronously" in promise-chain example
 }
 
 function request(hostname, path, port) {
@@ -33,12 +34,13 @@ function request(hostname, path, port) {
       });
 
       res.on('end', () => {
+        const result = Buffer.concat(data)
+          .toString();
+
         if (res.statusCode >= 400) {
-          reject(Buffer.concat(data)
-            .toString());
+          reject(result);
         } else {
-          resolve(Buffer.concat(data)
-            .toString());
+          resolve(result);
         }
       });
     });
@@ -51,7 +53,6 @@ function request(hostname, path, port) {
   });
 }
 
-exports.request = request; 
-exports.getData = getData; 
+exports.getData = getData;
 exports.getDataFail = getDataFail; 
 exports.output = output; 

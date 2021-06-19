@@ -20,6 +20,7 @@ function bulkGetData() {
 
   return Promise.all(promises)
     .then(output)
+    .then(() => output('All done!'))
     .catch(output);
 }
 
@@ -48,7 +49,6 @@ async function bulkGetDataInChunk(total, chunk) {
   output('All done!');
 }
 
-(() => {
-  // bulkGetData();
-  bulkGetDataInChunk(100, 10);
-})();
+bulkGetData();
+// bulkGetDataInChunk(100, 10);
+
