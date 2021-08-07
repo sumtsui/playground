@@ -23,3 +23,6 @@ MAC address and IPv6 both use Hexadecimal values
 
 MAC (media access control) address is unique in every device.
 https://www.quora.com/Is-the-MAC-address-unique-for-every-computer
+
+## OSI model vs TCP/IP model
+
