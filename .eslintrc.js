@@ -1,9 +1,10 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: [ '@typescript-eslint' ],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
   env: {
     node: true,
@@ -14,17 +15,19 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   root: true,
   rules: {
-    'newline-per-chained-call': [1, {ignoreChainWithDepth: 1}],
-    '@typescript-eslint/indent': ['error', 2],
+    'array-bracket-spacing': [ 'error', 'always' ],
+    'object-curly-spacing': [ 'error', 'always' ],
+    'newline-per-chained-call': [ 1, { ignoreChainWithDepth: 2 } ],
+    '@typescript-eslint/indent': [ 'error', 2 ],
     'keyword-spacing': 2,
     'no-unused-vars': 0,
-    'quote-props': ['error', 'consistent-as-needed'],
+    'quote-props': [ 'error', 'consistent-as-needed' ],
     'semi': 'warn',
     'no-undef': 'error',
     'no-global-assign': 'error',
-    'quotes': ['warn', 'single', { avoidEscape: true }],
-    'comma-dangle': ['error', 'only-multiline'],
-    'eqeqeq': ['error', 'always'],
+    'quotes': [ 'warn', 'single', { avoidEscape: true } ],
+    'comma-dangle': [ 'error', 'only-multiline' ],
+    'eqeqeq': [ 'error', 'always' ],
     'no-unused-expressions': [
       'warn',
       {
