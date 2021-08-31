@@ -19,3 +19,6 @@ https://btholt.github.io/complete-intro-to-linux-and-the-cli
 | ls -tr                                              | list dir content in reversed and last modified order                         | https://www.zerotouch.com/faqs/111/ls-by-date                                                          |
 | tar -zxvf <filename>                                | decompress tgz file                                                          | https://www.cyberciti.biz/faq/decompress-tgz-targz-files/ls-by-date                                    |
 | ls -p \| grep -v / \| wc -l                                | Count all files in a folder, omitting sub folders                                                          | https://askubuntu.com/questions/289321/listing-files-in-a-directory-without-listing-subdirectories-and-their-contents-i                                    |
+
+
+https://www.freecodecamp.org/news/the-linux-ls-command-how-to-list-files-in-a-directory-with-options/#:~:text=The%20ls%20command%20is%20used,them%20via%20the%20command%20line.
