@@ -5,3 +5,6 @@
 | how-to-remove-a-domain-from-certbot-and-nginx |                                               | https://www.datanovia.com/en/lessons/how-to-remove-a-domain-from-certbot-and-nginx/    |
 | npm list -g --depth=0                         | list npm globally installed packages          |
 | npm view \<package name> versions --json       | list all versions of package on NPM           | https://stackoverflow.com/questions/41415945/how-to-list-all-versions-of-an-npm-module |
+| sudo certbot --nginx -d \<domain name>       | Certbot create new certificate for domain           | |
+| sudo certbot certificates       | Certbot list all certs           | |
+| nginx -T       | Nginx list all configs           | |
