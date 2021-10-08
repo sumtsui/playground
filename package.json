@@ -4,6 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "lodash": "^4.17.20"
   },
   "devDependencies": {
