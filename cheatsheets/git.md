@@ -10,8 +10,8 @@
 | git log --follow -- <filename>                               | list commits on a specific file             | https://stackoverflow.com/questions/3701404/how-can-i-list-all-commits-that-changed-a-specific-file?rq=1 |
 | git branch -r                                                | list all remote branches                    |                                                              |
 |                                                              | get all remote branches to local            | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
-| git config --global credential.helper osxkeychain            | let git prompt password again            | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
+| git config --global credential.helper osxkeychain            | let git prompt password again               | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
 | git checkout --track <branchname>                            | get remote branches to local                | https://stackoverflow.com/questions/9537392/git-fetch-remote-branch |
-| git revert --no-commit HEAD~\<number of commits>..                            | revert several commits from head                | https://stackoverflow.com/questions/1463340/how-to-revert-multiple-git-commits |
-|                                                               |                                             |                                                              |
+| git revert --no-commit HEAD~\<number of commits>..           | revert several commits from head            | https://stackoverflow.com/questions/1463340/how-to-revert-multiple-git-commits |
+| git commit --amend -m "New commit message."                  | Amend last commit message                   |                                                              |
 
