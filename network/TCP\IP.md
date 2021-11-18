@@ -26,3 +26,4 @@ https://www.quora.com/Is-the-MAC-address-unique-for-every-computer
 
 ## OSI model vs TCP/IP model
 
+![OSI model vs TCP/IP model](./OSI-model-and-the-TCP-IP-stack.png)
