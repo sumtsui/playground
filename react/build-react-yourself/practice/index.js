@@ -1,132 +1,132 @@
-"use strict";
+'use strict';
 var tree = {
-    type: 'div',
-    props: {
-        className: 'foo',
-        children: [
+  type: 'div',
+  props: {
+    className: 'foo',
+    children: [
+      {
+        type: 'h1',
+        props: {
+          children: [
             {
-                type: 'h1',
-                props: {
-                    children: [
-                        {
-                            type: 'TEXT',
-                            props: {
-                                children: [],
-                                nodeValue: 'Hello,'
-                            }
-                        },
-                        {
-                            type: 'TEXT',
-                            props: {
-                                children: [],
-                                nodeValue: ' World'
-                            }
-                        }
-                    ]
-                }
+              type: 'TEXT',
+              props: {
+                children: [],
+                nodeValue: 'Hello,'
+              }
             },
             {
-                type: 'p',
-                props: {
-                    id: 'bar',
-                    children: [
-                        {
-                            type: 'TEXT',
-                            props: {
-                                nodeValue: 'hahahaha',
-                                children: []
-                            }
-                        },
-                        {
-                            type: 'br',
-                            props: {
-                                children: []
-                            }
-                        },
-                        {
-                            type: 'TEXT',
-                            props: {
-                                children: [],
-                                nodeValue: 'hohoho',
-                            }
-                        },
-                    ]
-                }
+              type: 'TEXT',
+              props: {
+                children: [],
+                nodeValue: ' World'
+              }
+            }
+          ]
+        }
+      },
+      {
+        type: 'p',
+        props: {
+          id: 'bar',
+          children: [
+            {
+              type: 'TEXT',
+              props: {
+                nodeValue: 'hahahaha',
+                children: []
+              }
             },
             {
-                type: 'p',
-                props: {
-                    children: [
-                        {
-                            type: 'TEXT',
-                            props: {
-                                nodeValue: 'this is ',
-                                children: []
-                            }
-                        },
-                        {
-                            type: 'strong',
-                            props: {
-                                children: [
-                                    {
-                                        type: 'TEXT',
-                                        props: {
-                                            nodeValue: 'another',
-                                            children: []
-                                        }
-                                    },
-                                ]
-                            }
-                        },
-                        {
-                            type: 'TEXT',
-                            props: {
-                                children: [],
-                                nodeValue: ' paragraph.',
-                            }
-                        },
-                    ]
-                }
+              type: 'br',
+              props: {
+                children: []
+              }
             },
-        ]
-    }
+            {
+              type: 'TEXT',
+              props: {
+                children: [],
+                nodeValue: 'hohoho',
+              }
+            },
+          ]
+        }
+      },
+      {
+        type: 'p',
+        props: {
+          children: [
+            {
+              type: 'TEXT',
+              props: {
+                nodeValue: 'this is ',
+                children: []
+              }
+            },
+            {
+              type: 'strong',
+              props: {
+                children: [
+                  {
+                    type: 'TEXT',
+                    props: {
+                      nodeValue: 'another',
+                      children: []
+                    }
+                  },
+                ]
+              }
+            },
+            {
+              type: 'TEXT',
+              props: {
+                children: [],
+                nodeValue: ' paragraph.',
+              }
+            },
+          ]
+        }
+      },
+    ]
+  }
 };
 // root element
 var rootEl = document.getElementById('root');
 // iterate the tree
 function processTree(tree) {
-    var arr = [tree];
-    while (arr.length) {
-        var node = arr.shift();
-        if (!node)
-            break;
-        arr.push.apply(arr, node.props.children);
-        createDOMElement(node);
-        console.log('node', node);
-    }
+  var arr = [ tree ];
+  while (arr.length) {
+    var node = arr.shift(); // work like a queue
+    if (!node)
+      break;
+    arr.push.apply(arr, node.props.children);   // a breadth first traversal
+    createDOMElement(node);
+    console.log('node', node);
+  }
 }
 processTree(tree);
 function createDOMElement(node) {
-    var dom;
-    if (node.type === 'TEXT') {
-        dom = document.createTextNode('');
-    }
-    else {
-        dom = document.createElement(node.type);
-    }
-    Object.keys(node.props)
-        .filter(function (key) { return key !== 'children'; })
-        .forEach(function (name) {
-        dom[name] = node.props[name];
+  var dom;
+  if (node.type === 'TEXT') {
+    dom = document.createTextNode('');
+  }
+  else {
+    dom = document.createElement(node.type);
+  }
+  Object.keys(node.props)
+    .filter(function (key) { return key !== 'children'; })
+    .forEach(function (name) {
+      dom[name] = node.props[name];
     });
-    node.dom = dom;
+  node.dom = dom;
 }
 function commitToDOM(tree, parentDOMNode) {
-    if (!tree)
-        return;
-    parentDOMNode.appendChild(tree.dom);
-    tree.props.children.forEach(function (c) {
-        commitToDOM(c, tree.dom);
-    });
+  if (!tree)
+    return;
+  parentDOMNode.appendChild(tree.dom);
+  tree.props.children.forEach(function (child) {
+    commitToDOM(child, tree.dom);
+  });
 }
 commitToDOM(tree, rootEl);

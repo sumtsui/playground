@@ -36,3 +36,5 @@ Not as efficient as an array for look up, which takes constant time.
 If goes imbalanced, will lose its strength and behave like an array.
 
 ## How to make sure the tree is balanced
+https://www.geeksforgeeks.org/convert-normal-bst-balanced-bst/
+AVL tree

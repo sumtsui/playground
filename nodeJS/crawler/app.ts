@@ -5,7 +5,7 @@ import path from 'path';
 
 const MAIN_DIR = path.resolve(__dirname, '/Users/sum/Pictures');
 
-const [, , ...args] = process.argv;
+const [ , , ...args ] = process.argv;
 
 console.log('args', args);
 
