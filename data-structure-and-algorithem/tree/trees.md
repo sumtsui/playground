@@ -63,3 +63,13 @@ d - e - b - c - f - a
 ## BFS (breadth first search)
 
 use Queue
+
+```
+      a
+    /   \
+   b     c
+  / \    /
+ d   e   f
+
+a - b - c - d - e - f
+```
