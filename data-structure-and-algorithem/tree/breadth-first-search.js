@@ -1,3 +1,14 @@
+const BinarySearchTree = require('./BinarySearchTree');
+
+const Tree = new BinarySearchTree();
+
+Tree.insert(19);
+Tree.insert(30);
+Tree.insert(3);
+Tree.insert(5);
+Tree.insert(17);
+Tree.insert(8);
+Tree.insert(24);
 // BFS
 /**
  *       10
@@ -20,4 +31,5 @@ function BFS(node) {
     if (cur.right) queue.push(cur.right);
   }
 }
-
+console.log('tree', Tree);
+BFS(Tree.root);
