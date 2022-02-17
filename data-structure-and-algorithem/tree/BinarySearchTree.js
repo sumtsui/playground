@@ -1,6 +1,6 @@
 class Node {
-  constructor(value){
-    this.value = value;
+  constructor(val){
+    this.val = val;
     this.left = null;
     this.right = null;
   }
@@ -11,16 +11,16 @@ class BinarySearchTree {
     this.root = null;
   }
   
-  insert(value){
-    var newNode = new Node(value);
+  insert(val){
+    var newNode = new Node(val);
     if (this.root === null){
       this.root = newNode;
       return this;
     }
     let current = this.root;
     while (current){
-      if (value === current.value) return undefined;
-      if (value < current.value){
+      if (val === current.val) return undefined;
+      if (val < current.val){
         if (current.left === null){
           current.left = newNode;
           return this;
