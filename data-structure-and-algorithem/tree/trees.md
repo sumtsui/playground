@@ -57,7 +57,7 @@ In this traversal method, the root node is visited last, hence the name. First w
   / \    /
  d   e   f
 
-d - e - b - c - f - a
+d - e - b - f - c - a
 ```
 
 ## BFS (breadth first search)
