@@ -1,4 +1,4 @@
-const { Tree } = require('./BinarySearchTree');
+const { Tree } = require('../tree/BinarySearchTree');
 
 function isBalanced(root) {
   let isBalanced = true;

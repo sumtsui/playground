@@ -49,7 +49,6 @@ Tree.insert(24);
 */
 
 function preorderStack(root) {
-
   const stack = [ root ];
   const res = [];
 
@@ -84,5 +83,23 @@ function inorderStack(root) {
   return result;
 }
 
+function postorderStack(root) {
+  const res = [];
+  let stack = [ root ];
+    
+  while (stack.length > 0) {
+    const cur = stack.pop();
+        
+    if (cur) {
+      res.push(cur.val);
+      stack.push(cur.left);
+      stack.push(cur.right);
+    }
+  }
+    
+  return res.reverse();
+}
+
 preorderStack(Tree.root);
 inorderStack(Tree.root);
+postorderStack(Tree.root);
