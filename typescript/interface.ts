@@ -61,6 +61,7 @@ interface ClockInterface {
 }
 
 class Clock implements ClockInterface {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(h: number, m: number) {}
   currentTime: Date = new Date();
   setTime(d) {
