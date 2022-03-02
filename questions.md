@@ -1,3 +1,13 @@
+### How Jest works and how it mock stuff?
+
+### How React works
+
+### How NodeJS works
+
+### Why hashmap is constant look up time?
+
+### Is there hashmap in js?
+
 ### How boolean value is stored?
 
 ### Why are there 1024 bytes in a kilobyte?
