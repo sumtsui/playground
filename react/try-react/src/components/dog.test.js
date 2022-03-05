@@ -4,9 +4,10 @@ import Dog from "./dog";
 import * as apis from "../utils/apis";
 import * as math from "../utils/math";
 
+jest.mock("../utils/math"); // jest.mock has be put outside of it????
+
 it("fetches a dog when 'get dog' button is clicked", async () => {
   // jest.mock("../utils/apis"); // why this is not working?????
-  jest.mock("../utils/math");
 
   // math.add = jest.fn();
   // apis.getDog = jest.fn(); // this works, but in your code you need it to return Promise, so need to mockImplementation
