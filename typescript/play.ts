@@ -12,3 +12,19 @@ const John = { name: 'John', age: 30 };
 const Mary = { name: 'Mary', age: 25, phoneNumber: '13344400999' };
 printPerson(John);
 printPerson(Mary);
+
+type Car = {
+  maker: string;
+  year: string;
+  accelarate: () => void
+}
+
+function makeCar(car: Partial<Car>) {
+  const fallback = {
+    maker: 'BMW',
+    year: '2010'
+  };
+  return { ...fallback, ...car };
+}
+
+// makeCar({ maker: 'Honda', year: '2013', accelarate: () => null });
