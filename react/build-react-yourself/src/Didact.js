@@ -41,7 +41,7 @@ function render(element, container) {
   wipRoot = {
     dom: container,
     props: {
-      children: [element],
+      children: [ element ],
     },
     /**
      * This property is a link to the old fiber, the fiber that we committed to the DOM in the previous commit phase (for reconciliation).
@@ -133,7 +133,7 @@ function updateFunctionComponent(fiber) {
   wipFiber = fiber;
   hookIndex = 0;
   wipFiber.hooks = []; // We also add a hooks array to the fiber to support calling useState several times in the same component.
-  const children = [fiber.type(fiber.props)];
+  const children = [ fiber.type(fiber.props) ];
   console.log('children got from calling a function component', children);
   reconcileChildren(fiber, children);
 }
@@ -264,7 +264,7 @@ function useState(initial) {
   wipFiber.hooks.push(hook);
   hookIndex++;
 
-  return [hook.state, setState];
+  return [ hook.state, setState ];
 }
 
 /* ----------------------------------------------------------------------------------
