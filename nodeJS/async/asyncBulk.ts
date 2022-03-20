@@ -1,5 +1,5 @@
 interface IAsyncFn {
-  (...args: any[]): Promise<any>
+  (index: number): Promise<any>
 }
 
 export async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: IAsyncFn) {
@@ -8,8 +8,7 @@ export async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: 
 
   while (i <= total) {
 
-    const task = asyncFn(i);
-    chain = chain.then(() => task);
+    chain = chain.then(() => asyncFn(i));
 
     if (i % chunk === 0) {
       await chain

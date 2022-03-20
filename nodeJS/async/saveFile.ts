@@ -1,4 +1,4 @@
-import fs from 'fs';
+import * as fs from 'fs';
 
 export function saveFile(filePath: string, data): Promise<string> {
   return new Promise((resolve, reject) => {
