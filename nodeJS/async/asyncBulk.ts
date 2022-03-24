@@ -8,7 +8,9 @@ export async function bulkGetDataInChunk(total: number, chunk: number, asyncFn: 
 
   while (i <= total) {
 
-    chain = chain.then(() => asyncFn(i));
+    const pr = asyncFn(i);
+
+    chain = chain.then(() => pr);
 
     if (i % chunk === 0) {
       await chain
@@ -27,7 +29,7 @@ export function bulkGetDataOnce(total: number, asyncFn: IAsyncFn, jobName = 'job
   while (i <= total) {
 
     const pr = asyncFn(i);
-    chain = chain.then(() => pr.then(output).catch(output));
+    chain = chain.then(() => pr.catch(output));
 
     i++;
   }
