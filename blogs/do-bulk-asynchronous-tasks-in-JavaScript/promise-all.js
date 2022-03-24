@@ -49,6 +49,6 @@ async function bulkGetDataInChunk(total, chunk) {
   output('All done!');
 }
 
-bulkGetData();
-// bulkGetDataInChunk(100, 10);
+// bulkGetData();
+bulkGetDataInChunk(100, 10);
 

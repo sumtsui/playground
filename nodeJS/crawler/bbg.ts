@@ -9,12 +9,12 @@ const [ , , ...args ] = process.argv;
 
 console.log('args', args);
 
-const picDir = MAIN_DIR + '/bgg';
-const url = 'boardgamegeek.com/boardgame/';
+const fileDir = MAIN_DIR + '/bgg';
+const url = 'https://boardgamegeek.com/boardgame/';
 const total = 100;
 const chunk = 10;
 
-makeDir(picDir);
+makeDir(fileDir);
 getBoardgames();
 
 function getBoardgame(idx: number) {
@@ -35,7 +35,15 @@ function getBoardgame(idx: number) {
   //   }),
   // ]);
 
-  return Promise.resolve('ok');
+  // return Promise.resolve('ok');
+  return request(url, idx + '')
+    .then((response) => {
+      console.log(response);
+      return Promise.resolve();
+    })
+    .catch(err => {
+      return err;
+    });
 }
 
 function getBoardgames() {

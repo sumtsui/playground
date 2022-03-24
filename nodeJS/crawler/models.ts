@@ -1,7 +1,7 @@
 import { request } from '../async/request';
 import { saveFile, makeDir, keepMakingDir } from '../async/saveFile';
 import { bulkGetDataOnce, bulkGetDataInChunk } from '../async/asyncBulk';
-import path from 'path';
+import * as path from 'path';
 
 const MAIN_DIR = path.resolve(__dirname, '/Users/sum/Pictures');
 
