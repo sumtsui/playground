@@ -1,11 +1,15 @@
 import "./App.css";
 import Dog from "./components/dog";
+import Recursive from "./components/RecursiveRendering";
+import Form from "./components/form";
 
 function App() {
   return (
     <div className="App">
-      <h1>React app</h1>
-      <Dog />
+      <h3>playground</h3>
+      {/* <Dog /> */}
+      {/* <Recursive /> */}
+      <Form />
     </div>
   );
 }
