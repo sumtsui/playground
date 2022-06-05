@@ -5,7 +5,7 @@ const users = [
   { name: 'Jeff', age: 14 },
   { name: 'Jack', age: 18 },
   { name: 'Milady', age: 22 },
-];
+]; 
 
 const compose = (...fns) => (args) =>
   fns.reduceRight((arg, fn) => fn(arg), args);
@@ -46,7 +46,7 @@ const reduce = (cb) => (arr) => arr.reduce(cb); // Just currify the reduce funct
 const mapWords = map(() => 1);
 const reduceWords = reduce((acc, curr) => (acc += curr));
 
-const result3 = compose(reduceWords, mapWords)(['foo', 'bar', 'baz']); //3
+const result3 = compose(reduceWords, mapWords)([ 'foo', 'bar', 'baz' ]); //3
 
 console.log('result3', result3);
 

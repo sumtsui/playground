@@ -3,7 +3,7 @@ import Didact from './Didact';
 
 function App(props) {
   const [ state, setState ] = Didact.useState(1);
-  const [ state2, setState2 ] = Didact.useState(100);
+  const [ state2, setState2 ] = Didact.useState(false);
 
   // Didact.useEffect(() => {
   //   console.log('state changed', state);
@@ -12,17 +12,23 @@ function App(props) {
   return (
     <div>
       <h1>Hi {props.name}</h1>
-      <button onClick={() => setState((c) => c + 1)}>Click me</button>
+      <button onClick={() => setState((state) => state + 1)}>Add</button>
+      <p>Counter: {state}</p>
       <button
         onClick={() => {
-          setState2((c) => c - 1);
-          setState2((c) => c - 1);
+          setState2((state) => !state);
         }}
       >
-        Click me
+        Toggle
       </button>
-      <p>what is going on?? I am scared!! {state}</p>
-      <p>what is going on?? I am scared!! {state2}</p>
+      {state2 ?
+        <div>
+          <h2>This is the title</h2>
+          <p>This is the paragraph.</p>
+        </div> : 
+        <p>
+          <span>It is hidden now.</span>
+        </p>}
     </div>
   );
 }

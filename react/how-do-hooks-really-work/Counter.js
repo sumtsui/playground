@@ -2,13 +2,13 @@
 const MyReact = require('./MyReact');
 
 function Counter() {
-  const [count, setCount] = MyReact.useState(0);
-  const [text, setText] = MyReact.useState('foo');
-  const [url, setUrl] = useSplitURL('www.netlify.com');
+  const [ count, setCount ] = MyReact.useState(0);
+  const [ text, setText ] = MyReact.useState('foo');
+  const [ url, setUrl ] = useSplitURL('www.netlify.com');
 
   MyReact.useEffect(() => {
     console.log('effect', count);
-  }, [count, text]);
+  }, [ count, text ]);
 
   return {
     click: () => setCount(count + 1),
@@ -20,10 +20,10 @@ function Counter() {
 }
 
 function useSplitURL(str) {
-  const [text, setText] = MyReact.useState(str);
+  const [ text, setText ] = MyReact.useState(str);
   const masked = text.split('.');
-  return [masked, setText];
-}
+  return [ masked, setText ];
+} 
 
 let App;
 App = MyReact.render(Counter);

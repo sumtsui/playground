@@ -27,9 +27,9 @@ const MyReact = (function () {
       const setStateHookIndex = currentHook;
       const setState = (newState) => (hooks[setStateHookIndex] = newState);
 
-      return [hooks[currentHook++], setState];
+      return [ hooks[currentHook++], setState ];
     },
   };
-})();
+})(); 
 
 module.exports = MyReact;
