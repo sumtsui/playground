@@ -87,6 +87,8 @@ let person2 = new Person('Sarah');
 
 Note that when we are calling our constructor function, **we are defining `greeting()` every time, which isn't ideal.** To avoid this, we can define functions on the prototype instead, which we will look at later.
 
+[Declaring methods in contructor vs on prototype](https://www.thecodeship.com/web-development/methods-within-constructor-vs-prototype-in-javascript/)
+
 Our finished constructor:
 
 ```js
