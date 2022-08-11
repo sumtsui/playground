@@ -4,6 +4,8 @@ import Recursive from "./components/RecursiveRendering";
 import Form from "./components/form";
 import Input from "./components/forwardRef";
 import React from "react";
+import OptimizeContextExample from "./components/how-to-optimize-your-context-value";
+import ObjectInArray from "./components/update-object-in-array";
 
 function App() {
   const inputRef = React.useRef(null);
@@ -14,11 +16,13 @@ function App() {
   return (
     <div className="App">
       <h3>playground</h3>
+      {/* <OptimizeContextExample /> */}
+      <ObjectInArray />
       {/* <Dog /> */}
       {/* <Recursive /> */}
-      <Form />
-      <Input label="my field" ref={inputRef} value={value} />
-      <button onClick={() => inputRef.current.log()}>save!</button>
+      {/* <Form /> */}
+      {/* <Input label="my field" ref={inputRef} value={value} /> */}
+      {/* <button onClick={() => inputRef.current.log()}>save!</button> */}
     </div>
   );
 }
