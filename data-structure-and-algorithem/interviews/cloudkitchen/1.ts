@@ -4,30 +4,72 @@
 // Hamburger          1595268625
 // Salad              1595268626
 // HotDog             1595268627
-// // Hamburger          1595268628
-// // HotDog             1595268629
-// // HotDog             1595268630
-// // …
+// Hamburger          1595268628
+// HotDog             1595268629
+// HotDog             1595268630
+// …
 
-// getCommon(2, orderList)
+/**
+getCommon(3)
+// an object keeping track of food -> frequency
+{
+  'salad': 1,
+  'hotdog': 1,
+}
+// an object keeping track of frequency -> food
+{
+  1: {
+    salad: true,
+    hotdog: true
+  },
+}
 
-// function getCommon(k, orderList) {
+// when new food come in
+  // check current food count (before adding new)
+  // go to freq -> food, find food by currnet count, remove food
+  // update food count in food -> freq
+  // put food in key (current count + 1) in freq -> food
+*/
 
-//   const obj = {}
+const mocklogfilelines = [
+  'Hamburger',        
+  'Salad',              
+  'HotDog',             
+  'Hamburger',          
+  'HotDog',             
+  'HotDog',             
+]; 
 
-//   for (let order of orderList) {
-//     if (obj[order]) {
-//       obj[order] += 1
-//     }
+function preprocess(lines) {
+  const foodToFreq = {};
+  const freqToFood = {};
 
-//     else {
-//       obj[order] = 1
-//     }
-//   }
+  for (let i = 0; i < lines.length; i++) {
+    const food = lines[i];
 
-//   obj.entries().sort(([keyPrev, valuePrev],[key, value]) => valuePrev - value)
+    const count = foodToFreq[food];
 
-// }
+    if (count === undefined) {
+      foodToFreq[food] = 1;
+      freqToFood[1] = { [food]: true };
+    }
+    else {
+      delete freqToFood[count][food];
+      foodToFreq[food] = count + 1;
+      if (freqToFood[count+1]) {
+        freqToFood[count+1][food] = true;
+      } else {
+        freqToFood[count+1] = { [food]: true };  
+      }
+    }
+  }
+
+  console.log('foodToFreq', foodToFreq);
+
+  return freqToFood;
+}
+
+console.log(preprocess(mocklogfilelines));
 
 // Part 2 Streaming
 // We now want to analyze food orders in a real-time streaming application. All food orders may not have been received at the time the top k most common ones need to be computed. Given the addition of this requirement, how would you handle processing incoming food orders and computing the top k?  
