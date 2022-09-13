@@ -53,4 +53,3 @@ https://www.log2base2.com/number-system/float-to-binary-conversion.html
 ### What is modulo 2**256
 
 ### What is byte masking
-
