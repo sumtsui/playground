@@ -6,6 +6,7 @@ import Input from "./components/forwardRef";
 import React from "react";
 import OptimizeContextExample from "./components/how-to-optimize-your-context-value";
 import ObjectInArray from "./components/update-object-in-array";
+import { Parent } from "./components/memorize-on-nested-object";
 
 function App() {
   const inputRef = React.useRef(null);
@@ -17,7 +18,8 @@ function App() {
     <div className="App">
       <h3>playground</h3>
       {/* <OptimizeContextExample /> */}
-      <ObjectInArray />
+      {/* <ObjectInArray /> */}
+      <Parent />
       {/* <Dog /> */}
       {/* <Recursive /> */}
       {/* <Form /> */}
