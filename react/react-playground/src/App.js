@@ -19,12 +19,17 @@ function App() {
       <h3>playground</h3>
       {/* <OptimizeContextExample /> */}
       {/* <ObjectInArray /> */}
-      <Parent />
+      {/* <Parent /> */}
       {/* <Dog /> */}
       {/* <Recursive /> */}
       {/* <Form /> */}
       {/* <Input label="my field" ref={inputRef} value={value} /> */}
       {/* <button onClick={() => inputRef.current.log()}>save!</button> */}
+      <iframe
+        width="900"
+        height="500"
+        src="https://eventx.docker/e/95ea8419-a557-4cde-a175-13cb31e8eeac/widget/checkout"
+      ></iframe>
     </div>
   );
 }

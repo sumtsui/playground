@@ -21,3 +21,6 @@ console.log(arr.map(increment));
 
 // double and increment
 console.log(arr.map(doubleAndIncrement));
+
+// compose in React
+// https://medium.com/javascript-scene/why-every-react-developer-should-learn-function-composition-23f41d4db3b1
