@@ -6,12 +6,19 @@ app.use(async (ctx, next) => {
   ctx.status = 200
   console.log('Setting status')
   // Call the next middleware, wait for it to complete
-  next()
+  await next()
   console.log('back')
 })
 // Middleware 2
-app.use(async (ctx) => {
+app.use(async (ctx, next) => {
   console.log('Setting body')
   ctx.body = 'Hello from Koa'
+  // await next()
+})
+
+app.use(async (ctx, next) => {
+  await next()
+  console.log('Setting body 2')
+  ctx.body = ctx.body + ' ,wait'
 })
 app.listen(3002, () => console.log('Koa app listening on 3002'))

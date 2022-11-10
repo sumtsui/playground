@@ -28,7 +28,7 @@ function App() {
       <iframe
         width="900"
         height="500"
-        src="https://eventx.docker/e/95ea8419-a557-4cde-a175-13cb31e8eeac/widget/checkout"
+        src="https://spot-staging.2vanx.com/e/ef72bcae-e747-4c2d-bd14-cc4565ed9451/widget/registration"
       ></iframe>
     </div>
   );
