@@ -1,4 +1,5 @@
 ```
+# https://sql.holt.courses/lessons/joins-and-constraints/other-types-of-joins
 CREATE DATABASE recipeguru;
 
 CREATE TABLE ingredients (
