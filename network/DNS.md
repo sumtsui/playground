@@ -1,0 +1,2 @@
+There are several types of DNS records. An A record points a domain directly to an IP address where requested resources can be found. However, some records, such as CNAME records, link a domain to another domain or "host." Other records, such as TXT records, allow a domain owner to store text information about the domain. A single domain may have many records of varying types. For example, your domain may have an A record pointing to the IP address of your web server and CNAME records pointing to the cloud service that handles your email.
+
