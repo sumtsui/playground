@@ -61,6 +61,19 @@ SELECT *
 FROM "attendee"
 where role_tags @> '"organizer"'
 
+# query row with field value as empty object
+SELECT id FROM event WHERE email_reminder_enabled_control::text = '{}'::text limit 5
+
+# Where in
+update
+  event
+set
+  feature_config_override = feature_config_override || '{"isOverrideBoothContentConfigEnabled":true}' :: jsonb
+where
+  id in (
+    select event_id from booth group by (event_id)
+  );
+
 ```
 
 
