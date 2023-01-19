@@ -22,3 +22,8 @@ https://btholt.github.io/complete-intro-to-linux-and-the-cli
 | ps aux \| grep -i <app name>                        | get pid by app name                                          | https://www.cyberciti.biz/faq/linux-find-process-name/       |
 
 
+Git add files by pattern
+https://stackoverflow.com/questions/2855140/recursively-add-files-by-pattern
+```
+git ls-files [path] | grep '\.java$' | xargs git add
+```
