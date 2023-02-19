@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "target": "ES2019"
   },
   "strict": true
 }
