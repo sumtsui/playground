@@ -30,6 +30,7 @@
 // // makeCar({ maker: 'Honda', year: '2013', accelarate: () => null });
 
 // Optional pick!!! 
+// BS
 const manualEmailFormFields = [
   'eventId',
   'name',
@@ -41,13 +42,19 @@ OutreachManualEmail,
   typeof manualEmailFormFields[number]
 >;
 
+function myfunc(params: ManualEmailCreateParams) {
+  return null;
+}
+
+const params: ManualEmailCreateParams = { name: 'haha' };
+myfunc(params);
+
 class OutreachManualEmail {
   eventId: string;
   name: string;
   sender: string; 
 }
 
-const params: ManualEmailCreateParams = { name: 'haha' };
 
 type SendgridPlaceholders<T extends string> = {
   [K in T]: `%${K}%`;
