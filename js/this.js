@@ -6,15 +6,20 @@ class FruitShop {
     return 'here is your apple';
   }
 }
+const fruitShop = new FruitShop;
 
 class MyShop {
-  fruitShop
-
-  constructor(shop) {
-    this.fruitShop = shop;
+  sellApple
+  constructor(sellAppleFn) {
+    this.sellApple = sellAppleFn;
   }
 
   sellStuff() {
+    try {
+      this.sellApple();
+    } catch (error) {
+      console.log(error); 
+    }
     // return this.doSomeInternalProcess().then(() => this.fruitShop.sellApple()); // 'here is your apple'
     // return this.doSomeInternalProcess().then(this.fruitShop.sellApple.bind(this.fruitShop)); // 'here is your apple'
     // return this.doSomeInternalProcess().then(this.fruitShop.sellApple); // TypeError: Cannot read properties of undefined (reading 'apple')
@@ -24,7 +29,6 @@ class MyShop {
     return Promise.resolve();
   }
 }
-const fruitShop = new FruitShop;
-const myShop = new MyShop(fruitShop);
+const myShop = new MyShop(fruitShop.sellApple);
 
-myShop.sellStuff().then(console.log);
+myShop.sellStuff();
