@@ -27,3 +27,5 @@ https://stackoverflow.com/questions/2855140/recursively-add-files-by-pattern
 ```
 git ls-files [path] | grep '\.java$' | xargs git add
 ```
+
+sudo netstat -tuln -p tcp
