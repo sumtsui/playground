@@ -1,5 +1,3 @@
-### mongodb
-
 ```
 # inside mongo shell
 # login
@@ -18,4 +16,7 @@ db.<collection_name>.find()
 mongodump --uri="<uri>"
 
 mongorestore --nsInclude "<db_name>" --uri="<uri>" path/to/dump
+
+# run a node js sendbox with docker
+docker run -it -v .:/app --rm node:18 bash
 ```
