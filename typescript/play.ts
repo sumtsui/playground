@@ -94,7 +94,22 @@ const sendgridPlaceholders = convertKeysToSendgridPlaceholders(
 );
 
 
+type Duck = {
+  name: string;
+  age: number;
+  color: string;
+};
 
+type Merged = Array<Duck & {
+  whatever: string[];
+}>;
+
+const duck: Merged = [ {
+  name: 'duck',
+  age: 10,
+  color: 'yellow',
+  whatever: [ 'haha' ],
+} ];
 
 
 
