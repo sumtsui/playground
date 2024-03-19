@@ -4,6 +4,7 @@ function getFile(data) {
 
   return new Promise((resolve) => {
     setTimeout(() => {
+      console.log('getFile', data);
       resolve(data);
     }, delay);
   });
@@ -16,16 +17,16 @@ function output(arg) {
 /**
  * helper for chaining promises
  */
-(function () {
-  ['file1', 'file2', 'file3']
-    .map(getFile)
-    .reduce((chain, pr) => {
-      return chain.then(() => pr)
-        .then(output);
-    }, Promise.resolve())
-    .then(() => output('complete'));
-  // })();
-});
+// (function () {
+//   ['file1', 'file2', 'file3']
+//     .map(getFile)
+//     .reduce((chain, pr) => {
+//       return chain.then(() => pr)
+//         .then(output);
+//     }, Promise.resolve())
+//     .then(() => output('complete'));
+//   })();
+// });
 
 /**
  * manually set a timeout for async function
